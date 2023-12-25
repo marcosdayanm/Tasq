@@ -1,0 +1,21 @@
+﻿<Properties StartupConfiguration="{BC2830F7-8AE2-45E6-A6C0-453639346390}|Default">
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Tasq/Program.cs">
+    <Files>
+      <File FileName="Tasq/Program.cs" Line="14" Column="50" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Tasq" expanded="True" />
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.Tasq FirstBuild="True" PreferredExecutionTarget="/Applications/Google Chrome.app" />
+</Properties>
