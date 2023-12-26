@@ -86,7 +86,7 @@ namespace Tasq.Migrations
                 {
                     Id = table.Column<string>(type: "TEXT", nullable: false),
                     Nombre = table.Column<string>(type: "TEXT", nullable: false),
-                    FechaNacimiento = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    FechaNacimiento = table.Column<DateTime>(type: "TEXT", nullable: true),
                     FormacionProfesional = table.Column<string>(type: "TEXT", nullable: true),
                     FotoUrl = table.Column<string>(type: "TEXT", nullable: true),
                     IdSede = table.Column<int>(type: "INTEGER", nullable: true),
@@ -221,7 +221,7 @@ namespace Tasq.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tasks",
+                name: "Tareas",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -236,14 +236,14 @@ namespace Tasq.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tasks", x => x.Id);
+                    table.PrimaryKey("PK_Tareas", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Tasks_AspNetUsers_IdUser",
+                        name: "FK_Tareas_AspNetUsers_IdUser",
                         column: x => x.IdUser,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Tasks_Departamentos_IdDepartamento",
+                        name: "FK_Tareas_Departamentos_IdDepartamento",
                         column: x => x.IdDepartamento,
                         principalTable: "Departamentos",
                         principalColumn: "Id");
@@ -303,13 +303,13 @@ namespace Tasq.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tasks_IdDepartamento",
-                table: "Tasks",
+                name: "IX_Tareas_IdDepartamento",
+                table: "Tareas",
                 column: "IdDepartamento");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tasks_IdUser",
-                table: "Tasks",
+                name: "IX_Tareas_IdUser",
+                table: "Tareas",
                 column: "IdUser");
         }
 
@@ -331,7 +331,7 @@ namespace Tasq.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Tasks");
+                name: "Tareas");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

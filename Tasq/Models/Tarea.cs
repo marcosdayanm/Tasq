@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Tasq.Models
 {
-	public class Task
+	public class Tarea
 	{
 
         [Key]

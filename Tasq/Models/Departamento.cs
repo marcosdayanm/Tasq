@@ -19,7 +19,7 @@ namespace Tasq.Models
         public Sede? Sede { get; set; }
 
         // One Departamento to Many Tasks
-        public ICollection<Task>? Tasks { get; set; }
+        public ICollection<Tarea>? Tareas { get; set; }
     }
 }
 

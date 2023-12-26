@@ -164,7 +164,7 @@ namespace Tasq.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("FechaNacimiento")
+                    b.Property<DateTime?>("FechaNacimiento")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("FormacionProfesional")
@@ -301,7 +301,7 @@ namespace Tasq.Migrations
                     b.ToTable("Sedes");
                 });
 
-            modelBuilder.Entity("Tasq.Models.Task", b =>
+            modelBuilder.Entity("Tasq.Models.Tarea", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -335,7 +335,7 @@ namespace Tasq.Migrations
 
                     b.HasIndex("IdUser");
 
-                    b.ToTable("Tasks");
+                    b.ToTable("Tareas");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -416,14 +416,14 @@ namespace Tasq.Migrations
                     b.Navigation("Direccion");
                 });
 
-            modelBuilder.Entity("Tasq.Models.Task", b =>
+            modelBuilder.Entity("Tasq.Models.Tarea", b =>
                 {
                     b.HasOne("Tasq.Models.Departamento", "Departamento")
-                        .WithMany("Tasks")
+                        .WithMany("Tareas")
                         .HasForeignKey("IdDepartamento");
 
                     b.HasOne("Tasq.Models.AppUser", "User")
-                        .WithMany("Tasks")
+                        .WithMany("Tareas")
                         .HasForeignKey("IdUser");
 
                     b.Navigation("Departamento");
@@ -433,12 +433,12 @@ namespace Tasq.Migrations
 
             modelBuilder.Entity("Tasq.Models.AppUser", b =>
                 {
-                    b.Navigation("Tasks");
+                    b.Navigation("Tareas");
                 });
 
             modelBuilder.Entity("Tasq.Models.Departamento", b =>
                 {
-                    b.Navigation("Tasks");
+                    b.Navigation("Tareas");
                 });
 
             modelBuilder.Entity("Tasq.Models.Direccion", b =>

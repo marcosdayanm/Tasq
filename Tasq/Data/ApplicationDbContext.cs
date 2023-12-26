@@ -18,7 +18,7 @@ namespace Tasq.Data
         public DbSet<Sede> Sedes { get; set; }
         public DbSet<Direccion> Direcciones { get; set; }
         public DbSet<Departamento> Departamentos { get; set; }
-        public DbSet<Models.Task> Tasks { get; set; } // para evitar errores
+        public DbSet<Tarea> Tareas { get; set; } // para evitar errores
 
 
 
@@ -43,13 +43,13 @@ namespace Tasq.Data
 
             // Departamento a Task
             modelBuilder.Entity<Departamento>()
-                .HasMany(d => d.Tasks)
+                .HasMany(d => d.Tareas)
                 .WithOne(t => t.Departamento)
                 .HasForeignKey(t => t.IdDepartamento);
 
             // AppUser a Task
             modelBuilder.Entity<AppUser>()
-                .HasMany(u => u.Tasks)
+                .HasMany(u => u.Tareas)
                 .WithOne(t => t.User)
                 .HasForeignKey(t => t.IdUser);
         }

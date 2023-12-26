@@ -12,7 +12,7 @@ namespace Tasq.Models
         //public string Id { get; set; } 
 
         public string Nombre { get; set; }
-        public DateTime FechaNacimiento { get; set; }
+        public DateTime? FechaNacimiento { get; set; }
         public string? FormacionProfesional { get; set; }
         public string? FotoUrl { get; set; }
 
@@ -22,7 +22,7 @@ namespace Tasq.Models
         public Sede? Sede { get; set; }
 
         // One to Many
-        public ICollection<Task>? Tasks { get; set; }
+        public ICollection<Tarea>? Tareas { get; set; }
 
     }
 }

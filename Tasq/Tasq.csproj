@@ -20,10 +20,12 @@
     <None Remove="Data\" />
     <None Remove="Repository\" />
     <None Remove="Interfaces\" />
+    <None Remove="Migrations\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="Repository\" />
     <Folder Include="Interfaces\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 </Project>
