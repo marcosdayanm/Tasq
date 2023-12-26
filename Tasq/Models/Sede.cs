@@ -10,6 +10,7 @@ namespace Tasq.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // Generado automático de PK
         public int Id { get; set; }
         public string Nombre { get; set; }
+        public string? Descripcion { get; set; }
         public string? FotoUrl { get; set; }
 
         // Fk a Direccion
@@ -20,6 +21,7 @@ namespace Tasq.Models
         // One to many
         public ICollection<Departamento>? Departamentos { get; set; }
         public ICollection<AppUser>? Users { get; set; }
+
     }
 }
 

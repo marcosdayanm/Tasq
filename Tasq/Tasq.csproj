@@ -22,6 +22,10 @@
     <None Remove="Interfaces\" />
     <None Remove="Migrations\" />
     <None Remove="Helpers\" />
+    <None Remove="ViewModels\" />
+    <None Remove="Views\Sede\" />
+    <None Remove="Views\Departamento\" />
+    <None Remove="Views\Tarea\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
@@ -29,5 +33,9 @@
     <Folder Include="Interfaces\" />
     <Folder Include="Migrations\" />
     <Folder Include="Helpers\" />
+    <Folder Include="ViewModels\" />
+    <Folder Include="Views\Sede\" />
+    <Folder Include="Views\Departamento\" />
+    <Folder Include="Views\Tarea\" />
   </ItemGroup>
 </Project>

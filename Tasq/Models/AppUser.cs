@@ -21,6 +21,11 @@ namespace Tasq.Models
         public int? IdSede { get; set; }
         public Sede? Sede { get; set; }
 
+        // FK a Departamento
+        [ForeignKey("Departamento")]
+        public int? IdDepartamento { get; set; }
+        public Departamento? Departamento { get; set; }
+
         // Fk a Direccion
         [ForeignKey("Direccion")]
         public int? IdDireccion { get; set; }

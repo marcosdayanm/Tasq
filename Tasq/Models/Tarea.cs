@@ -16,6 +16,9 @@ namespace Tasq.Models
         public DateTime FechaCreacion { get; set; }
         public DateTime? FechaEntrega { get; set; }
 
+        [Range(1, 5, ErrorMessage = "La prioridad debe estar entre 1 y 5")]
+        public int Prioridad { get; set; }
+
         // Fk a AppUser
         [ForeignKey("AppUser")]
         public string? IdUser { get; set; }
@@ -23,7 +26,7 @@ namespace Tasq.Models
 
         // Fk a Departamento
         [ForeignKey("Departamento")]
-        public int? IdDepartamento { get; set; }
+        public int IdDepartamento { get; set; }
         public Departamento? Departamento { get; set; }
     }
 }

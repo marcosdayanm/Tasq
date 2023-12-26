@@ -173,6 +173,9 @@ namespace Tasq.Migrations
                     b.Property<string>("FotoUrl")
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("IdDepartamento")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int?>("IdDireccion")
                         .HasColumnType("INTEGER");
 
@@ -218,6 +221,8 @@ namespace Tasq.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("IdDepartamento");
+
                     b.HasIndex("IdDireccion");
 
                     b.HasIndex("IdSede");
@@ -238,10 +243,13 @@ namespace Tasq.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Descripcion")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("FotoUrl")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("IdSede")
+                    b.Property<int>("IdSede")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Nombre")
@@ -288,6 +296,9 @@ namespace Tasq.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Descripcion")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("FotoUrl")
                         .HasColumnType("TEXT");
 
@@ -324,7 +335,7 @@ namespace Tasq.Migrations
                     b.Property<string>("FotoUrl")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("IdDepartamento")
+                    b.Property<int>("IdDepartamento")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("IdUser")
@@ -333,6 +344,9 @@ namespace Tasq.Migrations
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("Prioridad")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
@@ -396,6 +410,10 @@ namespace Tasq.Migrations
 
             modelBuilder.Entity("Tasq.Models.AppUser", b =>
                 {
+                    b.HasOne("Tasq.Models.Departamento", "Departamento")
+                        .WithMany("Users")
+                        .HasForeignKey("IdDepartamento");
+
                     b.HasOne("Tasq.Models.Direccion", "Direccion")
                         .WithMany()
                         .HasForeignKey("IdDireccion");
@@ -403,6 +421,8 @@ namespace Tasq.Migrations
                     b.HasOne("Tasq.Models.Sede", "Sede")
                         .WithMany("Users")
                         .HasForeignKey("IdSede");
+
+                    b.Navigation("Departamento");
 
                     b.Navigation("Direccion");
 
@@ -413,7 +433,9 @@ namespace Tasq.Migrations
                 {
                     b.HasOne("Tasq.Models.Sede", "Sede")
                         .WithMany("Departamentos")
-                        .HasForeignKey("IdSede");
+                        .HasForeignKey("IdSede")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Sede");
                 });
@@ -431,7 +453,9 @@ namespace Tasq.Migrations
                 {
                     b.HasOne("Tasq.Models.Departamento", "Departamento")
                         .WithMany("Tareas")
-                        .HasForeignKey("IdDepartamento");
+                        .HasForeignKey("IdDepartamento")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Tasq.Models.AppUser", "User")
                         .WithMany("Tareas")
@@ -450,6 +474,8 @@ namespace Tasq.Migrations
             modelBuilder.Entity("Tasq.Models.Departamento", b =>
                 {
                     b.Navigation("Tareas");
+
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("Tasq.Models.Direccion", b =>

@@ -7,14 +7,21 @@ using Microsoft.AspNetCore.Authentication.Cookies; // Para la auternticación
 using Microsoft.AspNetCore.Identity; // Para poder inicializar el AddIdentity
 using Microsoft.EntityFrameworkCore; // UseSqlServer()
 using Tasq.Data; // Añadí picandole a ApplicationDbContext
+using Tasq.Interfaces;
 // using Tasq.Interfaces;
 using Tasq.Models; // Para poder inicializar el AddIdentity
+using Tasq.Repository;
 // using Tasq.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<ISedeRepository, SedeRepository>();
+builder.Services.AddScoped<IDepartamentoRepository, DepartamentoRepository>();
+builder.Services.AddScoped<ITareaRepository, TareaRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 // Con las interfaces y los Repos que añadamos, debemos de declararlos acá en Program.cs
 

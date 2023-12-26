@@ -41,6 +41,13 @@ namespace Tasq.Data
                 .WithOne(u => u.Sede)
                 .HasForeignKey(u => u.IdSede);
 
+            // Departamentos a AppUser
+            modelBuilder.Entity<Departamento>()
+                .HasMany(s => s.Users)
+                .WithOne(u => u.Departamento)
+                .HasForeignKey(u => u.IdDepartamento);
+
+
             // Departamento a Task
             modelBuilder.Entity<Departamento>()
                 .HasMany(d => d.Tareas)

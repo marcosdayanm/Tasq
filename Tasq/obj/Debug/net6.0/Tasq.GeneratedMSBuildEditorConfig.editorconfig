@@ -10,13 +10,27 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Tasq
 build_property.RootNamespace = Tasq
 build_property.ProjectDir = /Users/marcosdayanmann/Library/Mobile Documents/com~apple~CloudDocs/Cursos/C# y ASP.NET MVC/Proyecto_Nubosoft/Tasq/Tasq/Tasq/
-build_property.EnableComHosting = 
-build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
 build_property.MSBuildProjectDirectory = /Users/marcosdayanmann/Library/Mobile Documents/com~apple~CloudDocs/Cursos/C# y ASP.NET MVC/Proyecto_Nubosoft/Tasq/Tasq/Tasq
 build_property._RazorSourceGeneratorDebug = 
+
+[/Users/marcosdayanmann/Library/Mobile Documents/com~apple~CloudDocs/Cursos/C\# y ASP.NET MVC/Proyecto_Nubosoft/Tasq/Tasq/Tasq/Views/Departamento/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGVwYXJ0YW1lbnRvL0NyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/marcosdayanmann/Library/Mobile Documents/com~apple~CloudDocs/Cursos/C\# y ASP.NET MVC/Proyecto_Nubosoft/Tasq/Tasq/Tasq/Views/Departamento/Detail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGVwYXJ0YW1lbnRvL0RldGFpbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/marcosdayanmann/Library/Mobile Documents/com~apple~CloudDocs/Cursos/C\# y ASP.NET MVC/Proyecto_Nubosoft/Tasq/Tasq/Tasq/Views/Departamento/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGVwYXJ0YW1lbnRvL0VkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/marcosdayanmann/Library/Mobile Documents/com~apple~CloudDocs/Cursos/C\# y ASP.NET MVC/Proyecto_Nubosoft/Tasq/Tasq/Tasq/Views/Departamento/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGVwYXJ0YW1lbnRvL0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/marcosdayanmann/Library/Mobile Documents/com~apple~CloudDocs/Cursos/C\# y ASP.NET MVC/Proyecto_Nubosoft/Tasq/Tasq/Tasq/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
@@ -24,6 +38,22 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/Users/marcosdayanmann/Library/Mobile Documents/com~apple~CloudDocs/Cursos/C\# y ASP.NET MVC/Proyecto_Nubosoft/Tasq/Tasq/Tasq/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/marcosdayanmann/Library/Mobile Documents/com~apple~CloudDocs/Cursos/C\# y ASP.NET MVC/Proyecto_Nubosoft/Tasq/Tasq/Tasq/Views/Sede/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2VkZS9DcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/marcosdayanmann/Library/Mobile Documents/com~apple~CloudDocs/Cursos/C\# y ASP.NET MVC/Proyecto_Nubosoft/Tasq/Tasq/Tasq/Views/Sede/Detail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2VkZS9EZXRhaWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/marcosdayanmann/Library/Mobile Documents/com~apple~CloudDocs/Cursos/C\# y ASP.NET MVC/Proyecto_Nubosoft/Tasq/Tasq/Tasq/Views/Sede/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2VkZS9FZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/marcosdayanmann/Library/Mobile Documents/com~apple~CloudDocs/Cursos/C\# y ASP.NET MVC/Proyecto_Nubosoft/Tasq/Tasq/Tasq/Views/Sede/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2VkZS9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/marcosdayanmann/Library/Mobile Documents/com~apple~CloudDocs/Cursos/C\# y ASP.NET MVC/Proyecto_Nubosoft/Tasq/Tasq/Tasq/Views/Shared/Error.cshtml]
