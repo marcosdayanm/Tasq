@@ -73,7 +73,7 @@ namespace Tasq.Controllers
             // Si es válido añadimos
             _tareaR.Add(tarea);
 
-            return RedirectToAction("Detail", "Sede", new { id = tareaVM.IdDepartamento }); // El parámetro que necesita el Método Detail del Controlador de Sede
+            return RedirectToAction("Detail", "Departamento", new { id = tareaVM.IdDepartamento }); // El parámetro que necesita el Método Detail del Controlador de Sede
         }
 
 

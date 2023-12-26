@@ -9,9 +9,10 @@ namespace Tasq.ViewModels
         public string Nombre { get; set; }
         public string? FotoUrl { get; set; }
         public int IdDepartamento { get; set; }
+        public string? NombreDepartamento { get; set; }
         public Departamento? Departamento { get; set; }
         public string? Descripcion { get; set; }
-        public DateTime? FechaEntrega { get; set; }
+        public DateTime FechaEntrega { get; set; }
     }
 }
 

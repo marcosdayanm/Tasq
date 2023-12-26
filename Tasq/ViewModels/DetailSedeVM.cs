@@ -7,6 +7,7 @@ namespace Tasq.ViewModels
 	{
         public Sede Sede { get; set; }
         public IEnumerable<Departamento> Departamentos { get; set; }
+        public IEnumerable<Tarea> Tareas { get; set; }
     }
 }
 

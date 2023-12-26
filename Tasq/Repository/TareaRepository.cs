@@ -40,7 +40,7 @@ namespace Tasq.Repository
 
         public async Task<IEnumerable<Tarea>> GetAllOrderedByDate()
         {
-            return await _context.Tareas.OrderByDescending(t => t.FechaEntrega).ToListAsync();
+            return await _context.Tareas.OrderBy(t => t.FechaEntrega).ToListAsync();
         }
 
         public async Task<Tarea> GetByIdAsync(int id)
@@ -55,12 +55,12 @@ namespace Tasq.Repository
 
         public async Task<IEnumerable<Tarea>> GetTareasByIdDepartamento(int id)
         {
-            return await _context.Tareas.Where(u => u.IdDepartamento == id).ToListAsync();
+            return await _context.Tareas.OrderBy(t => t.FechaEntrega).Where(u => u.IdDepartamento == id).ToListAsync();
         }
 
         public async Task<IEnumerable<Tarea>> GetTareasByIdSede(int id)
         {
-            return await _context.Tareas.Where(u => u.Departamento.IdSede == id).ToListAsync();
+            return await _context.Tareas.OrderBy(t => t.FechaEntrega).Include(i => i.User).Where(u => u.Departamento.IdSede == id).ToListAsync();
         }
 
         public bool Save()

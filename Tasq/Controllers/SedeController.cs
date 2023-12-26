@@ -11,14 +11,17 @@ namespace Tasq.Controllers
 	public class SedeController : Controller
 	{
 
-        private readonly ISedeRepository _sedeR; // ya no se nececita eso de _context porque ya eso está hecho con la Interface y los Repositories
-        private readonly IDepartamentoRepository _depaR; // ya no se nececita eso de _context porque ya eso está hecho con la Interface y los Repositories
-        private readonly IHttpContextAccessor _httpCA; // Para regresar lo del AppUserId en el form de Create
+        private readonly ISedeRepository _sedeR; 
+        private readonly IDepartamentoRepository _depaR;
+        private readonly ITareaRepository _tareaR;
 
-        public SedeController(ISedeRepository sedeR, IDepartamentoRepository depaR, IHttpContextAccessor httpCA)
+        private readonly IHttpContextAccessor _httpCA; 
+
+        public SedeController(ISedeRepository sedeR, IDepartamentoRepository depaR, ITareaRepository tareaR, IHttpContextAccessor httpCA)
 		{
             _sedeR = sedeR;
             _depaR = depaR;
+            _tareaR = tareaR;
             _httpCA = httpCA;
         }
 
@@ -35,13 +38,14 @@ namespace Tasq.Controllers
         public async Task<IActionResult> Detail(int id)
         {
             Sede sede = await _sedeR.GetByIdAsync(id);
-
             IEnumerable<Departamento> departamentos = await _depaR.GetDepartamentosByIdSede(id);
+            IEnumerable<Tarea> tareas = await _tareaR.GetTareasByIdSede(id);
 
             var vM = new DetailSedeVM
             {
                 Sede = sede,
                 Departamentos = departamentos,
+                Tareas = tareas,
                 // Tareas = tareas
             };
 

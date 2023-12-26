@@ -14,7 +14,7 @@ namespace Tasq.Models
         public string? FotoUrl { get; set; }
         public string? Descripcion { get; set; }
         public DateTime FechaCreacion { get; set; }
-        public DateTime? FechaEntrega { get; set; }
+        public DateTime FechaEntrega { get; set; }
 
         [Range(1, 5, ErrorMessage = "La prioridad debe estar entre 1 y 5")]
         public int Prioridad { get; set; }

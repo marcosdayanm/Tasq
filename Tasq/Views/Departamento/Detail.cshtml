@@ -1,26 +1,25 @@
 ﻿@using Tasq.ViewModels
 @model DetailDepartamentoVM
 
-<!-- DETAIL FOR CLUB -->
-<!-- Page Content -->
+
 <div class="container">
 
-    <!-- Portfolio Item Heading -->
+
     <h1 class="my-4">
-        @Model.Departamento.Nombre
-        <span style="color: darkgray">Details</span>
+        Departamento @Model.Departamento.Nombre
+        <span style="color: darkgray">Detalles</span>
 
     </h1>
 
-    <!-- Portfolio Item Row -->
+
     <div class="row">
 
         <div class="col-md-8">
-            <img class="img-fluid" src="@Model.Departamento.FotoUrl" alt="">
+            <img class="img-fluid" width="100%" height="500" src="@Model.Departamento.FotoUrl" alt="">
         </div>
 
         <div class="col-md-4">
-            <h3 class="my-3">Description</h3>
+            <h3 class="my-3">Descripción</h3>
             <p>@Model.Departamento.Descripcion</p>
             <h4 class="my-3">Sede</h4>
             <span>@Model.Departamento.Sede.Nombre</span> <br />
@@ -28,48 +27,61 @@
         </div>
 
     </div>
-    <!-- /.row -->
-    <!-- Related Projects Row -->
+
     <h3 class="my-4">Tareas Pendientes</h3>
 
 
+    <div>
+        <a>Crear una Tarea en @Model.Departamento.Nombre</a>
+        <a type="button" class="btn btn-primary" asp-area="" asp-controller="tarea" asp-action="create" asp-route-id="@Model.Departamento.Id">Crear</a>
+    </div>
 
 
     <div class="album py-5 bg-body-tertiary">
         <div class="container">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-
+            <div class="row row-cols-1">
 
                 @foreach (var item in Model.Tareas)
                 {
-                    <div class="col">
-                        <div class="card shadow-sm">
-                            <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="@item.FotoUrl" role="img">
-                            <div class="card-body">
-                                <p class="card-text"><strong>@item.Nombre</strong></p>
-                                @if (item.FechaEntrega != null)
+                    <div class="col-12">
+                        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                            <div class="col p-4 d-flex flex-column position-static">
+
+                                <strong class="d-inline-block mb-2 text-success-emphasis">@item.FechaEntrega</strong>
+                                <h3 class="mb-0">@item.Nombre</h3>
+
+
+                                @if (item.User != null)
                                 {
-                                    <p class="card-text">Para: @item.FechaEntrega</p>
+                                    <div class="mb-1 text-body-secondary">Responsable: <strong> @item.User.Nombre </strong></div>
                                 }
-                                
-                                <p class="card-text">@item.Descripcion</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <a asp-controller="departamento" asp-action="detail" asp-route-id="@item.Id" type="button" class="btn btn-sm btn-outline-secondary">Ver</a>  <!-- Para poner lo de los helpers, los botones tienen pedos con eso, es mejor usar anchor tags -->
-                                        @*if (User.Identity.IsAuthenticated && User.IsInRole("admin"))    @* Lo del role tiene que matchear exactamente, es case sensitive *@
-                                        {
-                                        <a asp-controller="departamento" asp-action="edit" asp-route-id="@item.Id" type="button" class="btn btn-sm btn-outline-secondary">Editar</a>
+                                else
+                                {
+                                    <div class="mb-1 text-body-secondary">Responsable: <strong> No asignado </strong></div>
+                                }
 
-                                        }
+                                <br />
+                                <div class="btn-group">
+                                    <a asp-controller="tarea" asp-action="Me" asp-route-id="@item.Id" type="button" class="btn btn-sm btn-outline-secondary">Anotarme</a>
+                                    @*if (User.Identity.IsAuthenticated && User.IsInRole("admin"))    @* Lo del role tiene que matchear exactamente, es case sensitive *@
+                                    {
+                                    <a asp-controller="tarea" asp-action="edit" asp-route-id="@item.Id" type="button" class="btn btn-sm btn-outline-secondary">Editar</a>
 
-                                    </div>
+                                    }
                                 </div>
+
+                                <p class="mb-auto">@item.Descripcion</p>
+
+                            </div>
+
+                            <div class="col-auto d-none d-lg-block">
+                                <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
                             </div>
                         </div>
                     </div>
                 }
 
-
             </div>
         </div>
     </div>
+

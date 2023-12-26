@@ -1,0 +1,42 @@
+﻿@using Tasq.ViewModels
+@model CreateTareaVM
+
+
+
+<h1>Crear una Tarea en el Departamento @Model.NombreDepartamento </h1>
+
+<br>
+<br>
+
+<form method="post" asp-action="Create">
+    <input type="hidden" asp-for="@Model.IdDepartamento" id="Id" />
+
+    <div class="form-group">
+        <label asp-for="Nombre">Nombre</label>
+        <input asp-for="Nombre" class="form-control" placeholder="Nombre de la Tarea">
+        <span asp-validation-for="Nombre" class="text.danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="FotoUrl">Foto</label>
+        <input asp-for="FotoUrl" class="form-control" placeholder="Imagen (URL)">
+        <span asp-validation-for="FotoUrl" class="text.danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Descripcion">Descripción</label>
+        <textarea asp-for="Descripcion" class="form-control" rows="4" placeholder="Descripción"></textarea>
+        <span asp-validation-for="Descripcion" class="text.danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="FechaEntrega">Fecha de Entrega</label>
+        <input asp-for="FechaEntrega" type="datetime-local" class="form-control" placeholder="Fecha de Entrega">
+        <span asp-validation-for="FechaEntrega" class="text.danger"></span>
+    </div>
+
+    <br />
+
+    <button type="submit" class="btn btn-primary">Crear</button>
+</form>
+

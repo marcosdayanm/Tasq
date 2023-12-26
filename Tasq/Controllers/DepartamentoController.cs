@@ -9,10 +9,10 @@ namespace Tasq.Controllers
 {
 	public class DepartamentoController : Controller
 	{
-        private readonly ITareaRepository _tareaR; // ya no se nececita eso de _context porque ya eso está hecho con la Interface y los Repositories
-        private readonly IDepartamentoRepository _depaR; // ya no se nececita eso de _context porque ya eso está hecho con la Interface y los Repositories
-        private readonly ISedeRepository _sedeR; // ya no se nececita eso de _context porque ya eso está hecho con la Interface y los Repositories
-        private readonly IHttpContextAccessor _httpCA; // Para regresar lo del AppUserId en el form de Create
+        private readonly ITareaRepository _tareaR; 
+        private readonly IDepartamentoRepository _depaR; 
+        private readonly ISedeRepository _sedeR; 
+        private readonly IHttpContextAccessor _httpCA;
 
         public DepartamentoController(ITareaRepository tareaR, IDepartamentoRepository depaR, ISedeRepository sedeR, IHttpContextAccessor httpCA)
 		{
