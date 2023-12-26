@@ -11,7 +11,7 @@ using Tasq.Data;
 namespace Tasq.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231226015617_InitialCreate")]
+    [Migration("20231226021604_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -175,6 +175,9 @@ namespace Tasq.Migrations
                     b.Property<string>("FotoUrl")
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("IdDireccion")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int?>("IdSede")
                         .HasColumnType("INTEGER");
 
@@ -216,6 +219,8 @@ namespace Tasq.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IdDireccion");
 
                     b.HasIndex("IdSede");
 
@@ -393,9 +398,15 @@ namespace Tasq.Migrations
 
             modelBuilder.Entity("Tasq.Models.AppUser", b =>
                 {
+                    b.HasOne("Tasq.Models.Direccion", "Direccion")
+                        .WithMany()
+                        .HasForeignKey("IdDireccion");
+
                     b.HasOne("Tasq.Models.Sede", "Sede")
                         .WithMany("Users")
                         .HasForeignKey("IdSede");
+
+                    b.Navigation("Direccion");
 
                     b.Navigation("Sede");
                 });

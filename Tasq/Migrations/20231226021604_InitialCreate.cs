@@ -90,6 +90,7 @@ namespace Tasq.Migrations
                     FormacionProfesional = table.Column<string>(type: "TEXT", nullable: true),
                     FotoUrl = table.Column<string>(type: "TEXT", nullable: true),
                     IdSede = table.Column<int>(type: "INTEGER", nullable: true),
+                    IdDireccion = table.Column<int>(type: "INTEGER", nullable: true),
                     UserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
@@ -108,6 +109,11 @@ namespace Tasq.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AspNetUsers_Direcciones_IdDireccion",
+                        column: x => x.IdDireccion,
+                        principalTable: "Direcciones",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_AspNetUsers_Sedes_IdSede",
                         column: x => x.IdSede,
@@ -279,6 +285,11 @@ namespace Tasq.Migrations
                 name: "EmailIndex",
                 table: "AspNetUsers",
                 column: "NormalizedEmail");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_IdDireccion",
+                table: "AspNetUsers",
+                column: "IdDireccion");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUsers_IdSede",

@@ -6,7 +6,6 @@
 /Users/marcosdayanmann/Library/Mobile Documents/com~apple~CloudDocs/Cursos/C# y ASP.NET MVC/Proyecto_Nubosoft/Tasq/Tasq/Tasq/obj/Debug/net6.0/Tasq.MvcApplicationPartsAssemblyInfo.cache
 /Users/marcosdayanmann/Library/Mobile Documents/com~apple~CloudDocs/Cursos/C# y ASP.NET MVC/Proyecto_Nubosoft/Tasq/Tasq/Tasq/obj/Debug/net6.0/Tasq.RazorAssemblyInfo.cache
 /Users/marcosdayanmann/Library/Mobile Documents/com~apple~CloudDocs/Cursos/C# y ASP.NET MVC/Proyecto_Nubosoft/Tasq/Tasq/Tasq/obj/Debug/net6.0/Tasq.RazorAssemblyInfo.cs
-/Users/marcosdayanmann/Library/Mobile Documents/com~apple~CloudDocs/Cursos/C# y ASP.NET MVC/Proyecto_Nubosoft/Tasq/Tasq/Tasq/obj/Debug/net6.0/Tasq.sourcelink.json
 /Users/marcosdayanmann/Library/Mobile Documents/com~apple~CloudDocs/Cursos/C# y ASP.NET MVC/Proyecto_Nubosoft/Tasq/Tasq/Tasq/bin/Debug/net6.0/appsettings.Development.json
 /Users/marcosdayanmann/Library/Mobile Documents/com~apple~CloudDocs/Cursos/C# y ASP.NET MVC/Proyecto_Nubosoft/Tasq/Tasq/Tasq/bin/Debug/net6.0/appsettings.json
 /Users/marcosdayanmann/Library/Mobile Documents/com~apple~CloudDocs/Cursos/C# y ASP.NET MVC/Proyecto_Nubosoft/Tasq/Tasq/Tasq/bin/Debug/net6.0/Tasq.staticwebassets.runtime.json
@@ -73,3 +72,4 @@
 /Users/marcosdayanmann/Library/Mobile Documents/com~apple~CloudDocs/Cursos/C# y ASP.NET MVC/Proyecto_Nubosoft/Tasq/Tasq/Tasq/obj/Debug/net6.0/Tasq.pdb
 /Users/marcosdayanmann/Library/Mobile Documents/com~apple~CloudDocs/Cursos/C# y ASP.NET MVC/Proyecto_Nubosoft/Tasq/Tasq/Tasq/obj/Debug/net6.0/Tasq.genruntimeconfig.cache
 /Users/marcosdayanmann/Library/Mobile Documents/com~apple~CloudDocs/Cursos/C# y ASP.NET MVC/Proyecto_Nubosoft/Tasq/Tasq/Tasq/obj/Debug/net6.0/ref/Tasq.dll
+/Users/marcosdayanmann/Library/Mobile Documents/com~apple~CloudDocs/Cursos/C# y ASP.NET MVC/Proyecto_Nubosoft/Tasq/Tasq/Tasq/obj/Debug/net6.0/Tasq.sourcelink.json

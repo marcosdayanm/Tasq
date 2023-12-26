@@ -21,11 +21,13 @@
     <None Remove="Repository\" />
     <None Remove="Interfaces\" />
     <None Remove="Migrations\" />
+    <None Remove="Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="Repository\" />
     <Folder Include="Interfaces\" />
     <Folder Include="Migrations\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
 </Project>

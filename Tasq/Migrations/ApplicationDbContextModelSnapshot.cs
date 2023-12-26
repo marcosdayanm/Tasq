@@ -173,6 +173,9 @@ namespace Tasq.Migrations
                     b.Property<string>("FotoUrl")
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("IdDireccion")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int?>("IdSede")
                         .HasColumnType("INTEGER");
 
@@ -214,6 +217,8 @@ namespace Tasq.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IdDireccion");
 
                     b.HasIndex("IdSede");
 
@@ -391,9 +396,15 @@ namespace Tasq.Migrations
 
             modelBuilder.Entity("Tasq.Models.AppUser", b =>
                 {
+                    b.HasOne("Tasq.Models.Direccion", "Direccion")
+                        .WithMany()
+                        .HasForeignKey("IdDireccion");
+
                     b.HasOne("Tasq.Models.Sede", "Sede")
                         .WithMany("Users")
                         .HasForeignKey("IdSede");
+
+                    b.Navigation("Direccion");
 
                     b.Navigation("Sede");
                 });
