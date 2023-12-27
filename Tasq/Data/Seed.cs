@@ -39,15 +39,11 @@ namespace Tasq.Data
                     {
                         Nombre = "Marcos",
                         UserName = "marcos@tasq.com",
+                        FechaNacimiento = new DateTime(2003, 4, 4, 0, 0, 0),
                         Email = "marcos@tasq.com",
                         EmailConfirmed = true,
-                        Direccion = new Direccion()
-                        {
-                            Calle = "345 Spear St",
-                            Estado = "CA",
-                            Ciudad = "San Francisco",
-                            Pais = "United States",
-                        }
+                        IdSede = 11,
+
 
                     };
                     await userManager.CreateAsync(newAdminUser, "Admin00*");
@@ -64,13 +60,7 @@ namespace Tasq.Data
                         UserName = "santiago@tasq.com",
                         Email = "santiago@tasq.com",
                         EmailConfirmed = true,
-                        Direccion = new Direccion()
-                        {
-                            Calle = "Av Paseo de las Palmas",
-                            Estado = "Mexico City",
-                            Ciudad = "Mexico City",
-                            Pais = "Mexico",
-                        }
+                        IdSede = 12,
 
                     };
                     await userManager.CreateAsync(newAdminUser2, "Admin00*");
@@ -88,13 +78,8 @@ namespace Tasq.Data
                         UserName = "admin@tasq.com",
                         Email = "admin@tasq.com",
                         EmailConfirmed = true,
-                        Direccion = new Direccion()
-                        {
-                            Calle = "Emerson 147",
-                            Estado = "Mexico City",
-                            Ciudad = "Mexico City",
-                            Pais = "Mexico",
-                        }
+
+
                     };
                     await userManager.CreateAsync(newAdminUser3, "Admin00*");
                     await userManager.AddToRoleAsync(newAdminUser3, UserRoles.Admin);
