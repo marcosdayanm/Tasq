@@ -37,7 +37,7 @@
                                 {
                                     <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Fecha de Nacimiento:</span> @Model.FechaNacimiento.Value.ToShortDateString()</li>
                                 }
-                                <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Sede:</span> @Model.Sede.Nombre</li>
+                            <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Sede:</span> @(Model.Sede?.Nombre ?? "No especificado")</li>
                                 <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Email:</span> @Model.Email</li>
                             </ul>
                         </div>

@@ -39,7 +39,6 @@ namespace Tasq.Controllers
         }
 
 
-        [HttpGet("login")]
         public IActionResult Login()
         {
             var response = new LoginVM(); // para que si por accidente le das refresh a la página no se borren los datos que estabas metiendo de Log In
@@ -94,9 +93,6 @@ namespace Tasq.Controllers
 
 
 
-
-
-        [HttpGet("register")]
         public async Task<IActionResult> Register()
         {
 
@@ -188,11 +184,10 @@ namespace Tasq.Controllers
 
 
 
-
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Account", "Login");
+            return RedirectToAction("Login", "Account");
         }
 
 

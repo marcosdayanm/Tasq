@@ -49,7 +49,7 @@ namespace Tasq.Controllers
 
 
         [HttpGet("departamento/create/{idSede}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Create(int idSede)
         {
             Sede sede = await _sedeR.GetByIdAsync(idSede);
@@ -98,7 +98,7 @@ namespace Tasq.Controllers
 
 
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Edit(int id)
         {
             var depa = await _depaR.GetByIdAsync(id);
@@ -144,7 +144,7 @@ namespace Tasq.Controllers
 
 
         [HttpPost, ActionName("Delete")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> DeleteDepartamento(int id)
         {
             var depa = await _depaR.GetByIdAsync(id);

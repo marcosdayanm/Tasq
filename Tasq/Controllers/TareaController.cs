@@ -31,9 +31,7 @@ namespace Tasq.Controllers
 
 
 
-        // [Authorize(Roles = "Admin")]
         [HttpGet("tarea/create/{idDepartamento}")]
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create(int idDepartamento)
         {
             Departamento depa = await _depaR.GetByIdAsync(idDepartamento);
@@ -52,7 +50,6 @@ namespace Tasq.Controllers
         }
 
 
-        // [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Create(CreateTareaVM tareaVM)
         {
@@ -81,7 +78,7 @@ namespace Tasq.Controllers
 
 
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Edit(int id)
         {
             var tarea = await _tareaR.GetByIdAsync(id);
@@ -101,7 +98,6 @@ namespace Tasq.Controllers
 
 
 
-        // [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Edit(int id, EditTareaVM tareaVM)
         {
@@ -154,7 +150,7 @@ namespace Tasq.Controllers
 
 
         [HttpPost, ActionName("Delete")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> DeleteTarea(int id)
         {
             var tarea = await _tareaR.GetByIdAsync(id);

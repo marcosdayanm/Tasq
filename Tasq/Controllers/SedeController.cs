@@ -51,7 +51,7 @@ namespace Tasq.Controllers
 
 
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         public IActionResult Create()
         {
             return View();
@@ -90,7 +90,7 @@ namespace Tasq.Controllers
 
 
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Edit(int id)
         {
             var sede = await _sedeR.GetByIdAsync(id);
@@ -135,7 +135,7 @@ namespace Tasq.Controllers
         }
 
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeleteSede(int id)
         {
