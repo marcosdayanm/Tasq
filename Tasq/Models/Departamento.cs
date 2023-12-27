@@ -17,7 +17,7 @@ namespace Tasq.Models
         // FK a Sede
         [ForeignKey("Sede")]
         public int IdSede { get; set; }
-        public Sede Sede { get; set; }
+        public Sede? Sede { get; set; }
 
         // One to many
         public ICollection<Tarea>? Tareas { get; set; }

@@ -18,7 +18,7 @@
 <form method="post" asp-action="Edit">
 
     <div class="form-group">
-        <input type="hidden" value="Id" id="Id" /> @* Éste field es para que el ID se quede registrado y lo podamos usar para acceder a la DB y editar el elemento necesario *@
+        <input type="hidden" asp-for="@Model.IdSede" id="Id" /> @* Éste field es para que el ID se quede registrado y lo podamos usar para acceder a la DB y editar el elemento necesario *@
 
         <label asp-for="Nombre">Nombre</label>
         <input asp-for="Nombre" class="form-control" placeholder="Nombre de la Sede">

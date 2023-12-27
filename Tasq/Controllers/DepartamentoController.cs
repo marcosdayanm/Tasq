@@ -101,7 +101,7 @@ namespace Tasq.Controllers
         [Authorize(Roles = "admin")]
         public async Task<IActionResult> Edit(int id)
         {
-            var depa = await _depaR.GetByIdAsync(id);
+            var depa = await _depaR.GetByIdAsyncNoTracking(id);
             if (depa == null) return View("Error");
             var depaVM = new EditDepartamentoVM
             {
@@ -110,7 +110,6 @@ namespace Tasq.Controllers
                 Descripcion = depa.Descripcion,
                 FotoUrl = depa.FotoUrl,
                 IdSede = depa.IdSede,
-                Sede = depa.Sede,
             };
             return View(depaVM);
         }
@@ -121,10 +120,9 @@ namespace Tasq.Controllers
         {
             if (!ModelState.IsValid)
             {
-                ModelState.AddModelError("", "Failed to edit club");
+                ModelState.AddModelError("", "Error al editar departamento");
                 return View("Edit", depaVM);
             }
-
 
             var depa = new Departamento
             {
@@ -132,13 +130,12 @@ namespace Tasq.Controllers
                 Nombre = depaVM.Nombre,
                 Descripcion = depaVM.Descripcion,
                 FotoUrl = depaVM.FotoUrl,
-                IdSede = (int)depaVM.IdSede,
-                Sede = depaVM.Sede,
+                IdSede = depaVM.IdSede,
             };
 
             _depaR.Update(depa);
 
-            return RedirectToAction("Detail", "Departamento", new { id = depaVM.IdSede });
+            return RedirectToAction("Detail", "Departamento", new { id = depaVM.Id });
 
         }
 

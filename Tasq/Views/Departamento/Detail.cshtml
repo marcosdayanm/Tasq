@@ -30,7 +30,7 @@
         <div class="col-md-4">
             @if (User.IsInRole("admin"))
             {
-                <a asp-controller="departamento" asp-action="edit" asp-route-id="@Model.Departamento.Id" type="button" class="btn btn-tarea btn-sm btn-outline-secondary">Editar @Model.Departamento.Nombre</a>
+                <a asp-controller="departamento" asp-action="edit" asp-route-id="@Model.Departamento.Id" type="button" class="btn btn-tarea btn-outline-secondary">Editar @Model.Departamento.Nombre</a>
             }
             <h3 class="my-3">Descripción</h3>
             <p>@Model.Departamento.Descripcion</p>

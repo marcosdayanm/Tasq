@@ -45,9 +45,9 @@ namespace Tasq.Repository
             return await _context.Departamentos.Include(i => i.Sede).FirstOrDefaultAsync(i => i.Id == id);
         }
 
-        public Task<Departamento> GetByIdAsyncNoTracking(int id)
+        public async Task<Departamento> GetByIdAsyncNoTracking(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Departamentos.AsNoTracking().Include(i => i.Sede).FirstOrDefaultAsync(i => i.Id == id);
         }
 
         public async Task<IEnumerable<Departamento>> GetDepartamentosByIdSede(int id)
@@ -59,6 +59,19 @@ namespace Tasq.Repository
         {
             var saved = _context.SaveChanges();
             return saved > 0 ? true : false;
+
+            //try
+            //{
+            //    var saved = _context.SaveChanges();
+            //    return saved > 0;
+            //}
+            //catch (Exception ex)
+            //{
+            //    // Registra la excepción para obtener más detalles
+            //    Console.WriteLine(ex.Message);
+            //    // Considera también registrar el stack trace si es necesario
+            //    return false;
+            //}
         }
 
         public bool Update(Departamento departamento)
