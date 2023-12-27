@@ -19,6 +19,7 @@ namespace Tasq.Interfaces
 
         Task<IEnumerable<Tarea>> GetTareasByIdSede(int id);
         Task<IEnumerable<Tarea>> GetTareasByIdDepartamento (int id);
+        Task<IEnumerable<Tarea>> GetTareasByIdUser(string id);
 
         // CRUD
         bool Add(Tarea tarea);

@@ -1,0 +1,51 @@
+﻿@using Tasq.ViewModels
+@model List<UserVM>
+
+
+
+<h1>Todos los Usuarios</h1>
+
+
+@foreach (var user in Model)
+{
+
+    <div class="container mt-3">
+        <div class="card">
+            <div class="card-body">
+                <!-- User's Image -->
+                <div class="row align-items-center">
+                    <div class="col-2">
+                        <img src="@user.FotoUrl" class="img-fluid rounded-circle" alt="User Image">
+                    </div>
+                    <!-- User's Info -->
+                    <div class="col-md-7">
+                        <h5 class="card-title">Nombre: @user.Nombre</h5>
+                        <p class="card-text">
+                            Email: @user.Email
+                        </p>
+                        <p class="card-text">
+                            Sede: @(user.Sede?.Nombre ?? "No especificado")
+                        </p>
+
+                        @if (user.FechaNacimiento.HasValue)
+                        {
+                            <p class="card-text">
+                                Fecha de Nacimiento: @user.FechaNacimiento.Value.ToShortDateString()
+                            </p>
+                        }
+
+                    </div>
+                    <!-- Additional Info -->
+                    @if (user.FormacionProfesional != null)
+                    {
+                        <div class="col-md-3 text-md-right">
+                            <p class="text-muted">Formación Profesional: @user.FormacionProfesional</p>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+}

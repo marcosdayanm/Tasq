@@ -8,21 +8,19 @@ using Tasq.ViewModels;
 
 namespace Tasq.Controllers
 {
-	public class SedeController : Controller
+    [Authorize]
+    public class SedeController : Controller
 	{
 
-        private readonly ISedeRepository _sedeR; 
+        private readonly ISedeRepository _sedeR;
         private readonly IDepartamentoRepository _depaR;
         private readonly ITareaRepository _tareaR;
 
-        private readonly IHttpContextAccessor _httpCA; 
-
-        public SedeController(ISedeRepository sedeR, IDepartamentoRepository depaR, ITareaRepository tareaR, IHttpContextAccessor httpCA)
+        public SedeController(ISedeRepository sedeR, IDepartamentoRepository depaR, ITareaRepository tareaR)
 		{
             _sedeR = sedeR;
             _depaR = depaR;
             _tareaR = tareaR;
-            _httpCA = httpCA;
         }
 
 
@@ -32,7 +30,6 @@ namespace Tasq.Controllers
             IEnumerable<Sede> sedes = await _sedeR.GetAll(); // Usando las funciones de Repository 
             return View(sedes); // Estamos mandando el resultado de la consulta al view para poder trabajar con el ahí. Ésta es la VIEW
         }
-
 
 
         public async Task<IActionResult> Detail(int id)
@@ -54,15 +51,13 @@ namespace Tasq.Controllers
 
 
 
-        // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
         }
 
 
-
-        // [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Create(CreateSedeVM sedeVM)
         {
@@ -87,16 +82,15 @@ namespace Tasq.Controllers
 
             };
 
-            // Si es válido añadimos
+      
             _sedeR.Add(sede);
-
             return RedirectToAction("Index");
         }
 
 
 
 
-        // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id)
         {
             var sede = await _sedeR.GetByIdAsync(id);
@@ -114,8 +108,6 @@ namespace Tasq.Controllers
         }
 
 
-
-        // [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Edit(int id, EditSedeVM sedeVM)
         {
@@ -143,8 +135,7 @@ namespace Tasq.Controllers
         }
 
 
-
-        // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeleteSede(int id)
         {

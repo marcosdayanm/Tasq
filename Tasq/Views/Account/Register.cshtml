@@ -1,0 +1,101 @@
+﻿@using Tasq.ViewModels
+@model RegisterVM
+
+
+<h1>Sign Up</h1>
+
+@{
+    ViewData["Title"] = "Registro";
+}
+
+
+@* Ésto lo agarré de Teddy Smith *@
+
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <p>
+            <h4>Crear una Cuenta</h4>
+        </p>
+
+
+        @if (TempData["Error"] != null)@* Ésta es la validación de TempData que pusimos para que el usuario sepa si hubo un error o todo correcto *@
+        {
+            <div class="col-md-12 alert alert-danger">
+                <span><b>Sorry!</b> - @TempData["Error"]</span>
+            </div>
+        }
+
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <form asp-action="Register">
+                    @* Ésto significa que es un form de post *@
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label asp-for="Nombre" class="control-label"></label>
+                        <input asp-for="Nombre" class="form-control">
+                        <span asp-validation-for="Nombre" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input asp-for="Email" class="form-control">
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="FechaNacimiento">Fecha de Nacimiento</label>
+                        <input asp-for="FechaNacimiento" type="datetime-local" class="form-control">
+                        <span asp-validation-for="FechaNacimiento" class="text.danger"></span>
+                    </div>
+
+                    @if (Model.Sedes != null && Model.Sedes.Any())
+                    {
+                        <div class="form-group">
+                            <label asp-for="SedeSeleccionadaId">* Selecciona una Sede</label>
+                            <select asp-for="SedeSeleccionadaId" required class="form-control">
+                                <option value="">-- Seleccione una Sede --</option>
+                                @foreach (var sede in Model.Sedes)
+                                {
+                                    <option value="@sede.Id">@sede.Nombre</option>
+                                }
+                            </select>
+                        </div>
+                    }
+
+                    <div class="form-group">
+                        <label asp-for="FormacionProfesional" class="control-label"></label>
+                        <input asp-for="FormacionProfesional" class="form-control">
+                        <span asp-validation-for="FormacionProfesional" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="FotoUrl" class="control-label"></label>
+                        <input asp-for="FotoUrl" class="form-control">
+                        <span asp-validation-for="FotoUrl" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Password" class="control-label"></label>
+                        <input asp-for="Password" class="form-control" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="ConfirmPassword" class="control-label"></label>
+                        <input asp-for="ConfirmPassword" class="form-control" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input class="btn btn-outline-success float right" type="submit" value="Register" />
+                        <a class="btn btn-outline-secondary" asp-controller="Club" asp-action="Index">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

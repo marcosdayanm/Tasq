@@ -3,52 +3,73 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Tasq</title>
+    <title>@ViewData["Title"] Tasq</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Tasq.styles.css" asp-append-version="true" />
+    <link rel="icon" href="~/favicon.png" asp-append-version="true" />
 </head>
+
+
+
+@if (User.Identity.IsAuthenticated)
+    {
+        var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+        var userEmail = User.FindFirst(System.Security.Claims.ClaimTypes.Email)?.Value;
+        var userRole = User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value;
+    }
+
+
+
+
+
 <body class="">
     <header>
-        <nav class="navbar navbar-dark bg-dark taxt-white navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-dark bg-dark taxt-white navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3 fixed-top">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Tasq</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"> <img src="~/tasqlogo.png" width="auto" height="35" />   </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Sede" asp-action="Index">Sedes</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Departamento" asp-action="Index">Departamentos</a>
-                        </li>
                     </ul>
 
                     @if (User.Identity.IsAuthenticated)
                     {
+                        <ul class="navbar-nav me-auto">
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Sede" asp-action="Index">Sedes</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Departamento" asp-action="Index">Departamentos</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Tarea" asp-action="Index">Tareas</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="User" asp-action="Index">Usuarios</a>
+                            </li>
+
+                        </ul>
+
                         <ul class="navbar-nav ms-auto">
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="user" asp-action="Index">Runners</a>
+                                <a class="nav-link" asp-area="" asp-controller="User" asp-action="Detail"> hola, @await Component.InvokeAsync("User") </a>
                             </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Dashboard" asp-action="Index">Dashboard</a>
-                            </li>
-
-
-                            <li class="nav-item">
-                                <a class="nav-link"> @await Component.InvokeAsync("User") </a>
-                            </li>
-
 
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
                             </li>
-
                         </ul>
+
+
+
                     }
                     else
                     {
@@ -62,7 +83,7 @@
                             </li>
                         </ul>
                     }
-                        
+
 
                 </div>
             </div>
@@ -70,6 +91,12 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+
             @RenderBody()
         </main>
     </div>

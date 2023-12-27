@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Tasq.Interfaces;
 using Tasq.Models;
@@ -7,12 +8,13 @@ using Tasq.ViewModels;
 
 namespace Tasq.Controllers
 {
-	public class TareaController : Controller
+    [Authorize]
+    public class TareaController : Controller
 	{
-        private readonly ITareaRepository _tareaR; // ya no se nececita eso de _context porque ya eso está hecho con la Interface y los Repositories
-        private readonly IDepartamentoRepository _depaR; // ya no se nececita eso de _context porque ya eso está hecho con la Interface y los Repositories
-        private readonly ISedeRepository _sedeR; // ya no se nececita eso de _context porque ya eso está hecho con la Interface y los Repositories
-        private readonly IHttpContextAccessor _httpCA; // Para regresar lo del AppUserId en el form de Create
+        private readonly ITareaRepository _tareaR; 
+        private readonly IDepartamentoRepository _depaR;
+        private readonly ISedeRepository _sedeR; 
+
 
         public TareaController(ITareaRepository tareaR, IDepartamentoRepository depaR)
 		{
@@ -31,6 +33,7 @@ namespace Tasq.Controllers
 
         // [Authorize(Roles = "Admin")]
         [HttpGet("tarea/create/{idDepartamento}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create(int idDepartamento)
         {
             Departamento depa = await _depaR.GetByIdAsync(idDepartamento);
@@ -78,8 +81,7 @@ namespace Tasq.Controllers
 
 
 
-
-        // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id)
         {
             var tarea = await _tareaR.GetByIdAsync(id);
@@ -129,8 +131,30 @@ namespace Tasq.Controllers
 
 
 
-        // [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public async Task<IActionResult> Me(int idTarea, string returnUrl)
+        {
+            var Iduser = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            if (Iduser == null) return RedirectToAction("Login", "Account");
+
+            var tarea = await _tareaR.GetByIdAsync(idTarea);
+            if (tarea == null) return View("Error");
+
+            tarea.IdUser = Iduser;
+            _tareaR.Update(tarea);
+
+            // Así se saca la url de la página en donde estabamos
+            var refererUrl = Request.Headers["Referer"].ToString();
+
+            if (!string.IsNullOrEmpty(refererUrl) && Url.IsLocalUrl(returnUrl)) return Redirect(returnUrl);
+
+            else return RedirectToAction("Index", "Sede");
+
+        }
+
+
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteTarea(int id)
         {
             var tarea = await _tareaR.GetByIdAsync(id);

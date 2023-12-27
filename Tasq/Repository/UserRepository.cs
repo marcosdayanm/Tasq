@@ -27,7 +27,7 @@ namespace Tasq.Repository
 
         public async Task<IEnumerable<AppUser>> GetAllUsers()
         {
-            return await _context.Users.ToListAsync();
+            return await _context.Users.Include(i => i.Departamento).Include(i => i.Sede).ToListAsync();
         }
 
         public async Task<IEnumerable<AppUser>> GetAllUsersByCity(string city)
@@ -47,7 +47,7 @@ namespace Tasq.Repository
 
         public async Task<AppUser> GetUserById(string id)
         {
-            return await _context.Users.FindAsync(id);
+            return await _context.Users.Include(u => u.Sede).FirstOrDefaultAsync(u => u.Id == id);
         }
 
         public bool Save()

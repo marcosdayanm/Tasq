@@ -26,6 +26,11 @@
     <None Remove="Views\Sede\" />
     <None Remove="Views\Departamento\" />
     <None Remove="Views\Tarea\" />
+    <None Remove="Views\Account\" />
+    <None Remove="Views\Shared\Components\" />
+    <None Remove="Views\Shared\Components\User\" />
+    <None Remove="ViewComponents\" />
+    <None Remove="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
@@ -37,5 +42,10 @@
     <Folder Include="Views\Sede\" />
     <Folder Include="Views\Departamento\" />
     <Folder Include="Views\Tarea\" />
+    <Folder Include="Views\Account\" />
+    <Folder Include="Views\Shared\Components\" />
+    <Folder Include="Views\Shared\Components\User\" />
+    <Folder Include="ViewComponents\" />
+    <Folder Include="Views\User\" />
   </ItemGroup>
 </Project>

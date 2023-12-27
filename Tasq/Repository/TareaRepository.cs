@@ -30,7 +30,7 @@ namespace Tasq.Repository
 
         public async Task<IEnumerable<Tarea>> GetAll()
         {
-            return await _context.Tareas.ToListAsync();
+            return await _context.Tareas.Include(i => i.User).Include(j => j.Departamento).OrderBy(t => t.FechaEntrega).ToListAsync();
         }
 
         public Task<IEnumerable<Tarea>> GetAllAsyncNoTracking()
@@ -55,12 +55,17 @@ namespace Tasq.Repository
 
         public async Task<IEnumerable<Tarea>> GetTareasByIdDepartamento(int id)
         {
-            return await _context.Tareas.OrderBy(t => t.FechaEntrega).Where(u => u.IdDepartamento == id).ToListAsync();
+            return await _context.Tareas.Include(i => i.User).Include(j => j.Departamento).OrderBy(t => t.FechaEntrega).Where(u => u.IdDepartamento == id).ToListAsync();
         }
 
         public async Task<IEnumerable<Tarea>> GetTareasByIdSede(int id)
         {
-            return await _context.Tareas.OrderBy(t => t.FechaEntrega).Include(i => i.User).Where(u => u.Departamento.IdSede == id).ToListAsync();
+            return await _context.Tareas.Include(i => i.User).Include(j => j.Departamento).OrderBy(t => t.FechaEntrega).Include(i => i.User).Where(u => u.Departamento.IdSede == id).ToListAsync();
+        }
+
+        public async Task<IEnumerable<Tarea>> GetTareasByIdUser(string id)
+        {
+            return await _context.Tareas.Include(i => i.User).Include(j => j.Departamento).OrderBy(t => t.FechaEntrega).Include(i => i.User).Where(u => u.User.Id == id).ToListAsync();
         }
 
         public bool Save()

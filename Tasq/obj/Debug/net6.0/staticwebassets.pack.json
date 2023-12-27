@@ -9,8 +9,8 @@
       "PackagePath": "staticwebassets/css/site.css"
     },
     {
-      "Id": "/Users/marcosdayanmann/Library/Mobile Documents/com~apple~CloudDocs/Cursos/C# y ASP.NET MVC/Proyecto_Nubosoft/Tasq/Tasq/Tasq/wwwroot/favicon.ico",
-      "PackagePath": "staticwebassets/favicon.ico"
+      "Id": "/Users/marcosdayanmann/Library/Mobile Documents/com~apple~CloudDocs/Cursos/C# y ASP.NET MVC/Proyecto_Nubosoft/Tasq/Tasq/Tasq/wwwroot/favicon.png",
+      "PackagePath": "staticwebassets/favicon.png"
     },
     {
       "Id": "/Users/marcosdayanmann/Library/Mobile Documents/com~apple~CloudDocs/Cursos/C# y ASP.NET MVC/Proyecto_Nubosoft/Tasq/Tasq/Tasq/wwwroot/js/site.js",
@@ -243,6 +243,10 @@
     {
       "Id": "/Users/marcosdayanmann/Library/Mobile Documents/com~apple~CloudDocs/Cursos/C# y ASP.NET MVC/Proyecto_Nubosoft/Tasq/Tasq/Tasq/wwwroot/lib/jquery/dist/jquery.min.map",
       "PackagePath": "staticwebassets/lib/jquery/dist/jquery.min.map"
+    },
+    {
+      "Id": "/Users/marcosdayanmann/Library/Mobile Documents/com~apple~CloudDocs/Cursos/C# y ASP.NET MVC/Proyecto_Nubosoft/Tasq/Tasq/Tasq/wwwroot/tasqlogo.png",
+      "PackagePath": "staticwebassets/tasqlogo.png"
     },
     {
       "Id": "obj/Debug/net6.0/staticwebassets/msbuild.Tasq.Microsoft.AspNetCore.StaticWebAssets.props",

@@ -1,6 +1,14 @@
 ﻿@model IEnumerable<Departamento>
 
 
+<title>
+    @{
+        ViewData["Title"] = "Departamentos";
+    }
+</title>
+
+
+
 <h1>Todos los Departamentos</h1>
 
 <div class="album py-5 bg-body-tertiary">
@@ -19,10 +27,10 @@
                             <p class="card-text">@item.Descripcion</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <a asp-controller="departamento" asp-action="detail" asp-route-id="@item.Id" type="button" class="btn btn-sm btn-outline-secondary">Ver</a>  <!-- Para poner lo de los helpers, los botones tienen pedos con eso, es mejor usar anchor tags -->
-                                    @*if (User.Identity.IsAuthenticated && User.IsInRole("admin"))    @* Lo del role tiene que matchear exactamente, es case sensitive *@
+                                    <a asp-controller="departamento" asp-action="detail" asp-route-id="@item.Id" type="button" class="btn btn-tarea btn-sm btn-outline-secondary">Ver</a>  <!-- Para poner lo de los helpers, los botones tienen pedos con eso, es mejor usar anchor tags -->
+                                    @if (User.IsInRole("admin"))@* Lo del role tiene que matchear exactamente, es case sensitive *@
                                     {
-                                    <a asp-controller="departamento" asp-action="edit" asp-route-id="@item.Id" type="button" class="btn btn-sm btn-outline-secondary">Editar</a>
+                                        <a asp-controller="departamento" asp-action="edit" asp-route-id="@item.Id" type="button" class="btn btn-tarea btn-sm btn-outline-secondary">Editar</a>
                                     }
 
                                 </div>

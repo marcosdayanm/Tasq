@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Tasq.Interfaces;
 using Tasq.Models;
@@ -7,19 +8,18 @@ using static System.Net.WebRequestMethods;
 
 namespace Tasq.Controllers
 {
-	public class DepartamentoController : Controller
+    [Authorize]
+    public class DepartamentoController : Controller
 	{
         private readonly ITareaRepository _tareaR; 
         private readonly IDepartamentoRepository _depaR; 
         private readonly ISedeRepository _sedeR; 
-        private readonly IHttpContextAccessor _httpCA;
 
-        public DepartamentoController(ITareaRepository tareaR, IDepartamentoRepository depaR, ISedeRepository sedeR, IHttpContextAccessor httpCA)
+        public DepartamentoController(ITareaRepository tareaR, IDepartamentoRepository depaR, ISedeRepository sedeR)
 		{
             _tareaR = tareaR;
             _depaR = depaR;
             _sedeR = sedeR;
-            _httpCA = httpCA;
         }
 
 
@@ -48,8 +48,8 @@ namespace Tasq.Controllers
 
 
 
-        // [Authorize(Roles = "Admin")]
         [HttpGet("departamento/create/{idSede}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create(int idSede)
         {
             Sede sede = await _sedeR.GetByIdAsync(idSede);
@@ -98,7 +98,7 @@ namespace Tasq.Controllers
 
 
 
-        // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id)
         {
             var depa = await _depaR.GetByIdAsync(id);
@@ -116,8 +116,6 @@ namespace Tasq.Controllers
         }
 
 
-
-        // [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Edit(int id, EditDepartamentoVM depaVM)
         {
@@ -145,9 +143,8 @@ namespace Tasq.Controllers
         }
 
 
-
-        // [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteDepartamento(int id)
         {
             var depa = await _depaR.GetByIdAsync(id);

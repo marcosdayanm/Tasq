@@ -2,6 +2,16 @@
 @model DetailDepartamentoVM
 
 
+
+<title>
+    @{
+        ViewData["Title"] = "Departamentos";
+    }
+</title>
+
+
+
+
 <div class="container">
 
 
@@ -43,42 +53,53 @@
 
                 @foreach (var item in Model.Tareas)
                 {
+
                     <div class="col-12">
-                        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                            <div class="col p-4 d-flex flex-column position-static">
-
-                                <strong class="d-inline-block mb-2 text-success-emphasis">@item.FechaEntrega</strong>
-                                <h3 class="mb-0">@item.Nombre</h3>
-
-
-                                @if (item.User != null)
+                        <div class="card mb-4 shadow-sm">
+                            <div class="row g-0">
+                                @if (item.FotoUrl != null)
                                 {
-                                    <div class="mb-1 text-body-secondary">Responsable: <strong> @item.User.Nombre </strong></div>
+                                    <div class="col-md-4">
+                                        <img src="@item.FotoUrl" alt="Imagen de @item.Nombre" class="img-fluid rounded-start">
+                                    </div>
                                 }
-                                else
-                                {
-                                    <div class="mb-1 text-body-secondary">Responsable: <strong> No asignado </strong></div>
-                                }
-
-                                <br />
-                                <div class="btn-group">
-                                    <a asp-controller="tarea" asp-action="Me" asp-route-id="@item.Id" type="button" class="btn btn-sm btn-outline-secondary">Anotarme</a>
-                                    @*if (User.Identity.IsAuthenticated && User.IsInRole("admin"))    @* Lo del role tiene que matchear exactamente, es case sensitive *@
-                                    {
-                                    <a asp-controller="tarea" asp-action="edit" asp-route-id="@item.Id" type="button" class="btn btn-sm btn-outline-secondary">Editar</a>
-
-                                    }
+                                <div class="col-md-4">
+                                    <div class="card-body">
+                                        <h5 class="card-title">@item.Nombre</h5>
+                                        <p class="card-text"><small class="text-muted">@item.Departamento.Nombre</small></p>
+                                        @if (item.User != null)
+                                        {
+                                            <p class="card-text">Responsable: <strong>@item.User.Nombre</strong></p>
+                                        }
+                                        else
+                                        {
+                                            <p class="card-text">Responsable: <strong>No asignado</strong></p>
+                                        }
+                                        <div class="d-flex justify-content-start align-items-center">
+                                            <form asp-controller="Tarea" asp-action="Me" method="post">
+                                                <input type="hidden" name="idTarea" value="@item.Id" />
+                                                <input type="hidden" name="returnUrl" value="@Context.Request.Path.Value" />
+                                                <button type="submit" class="btn btn-primary btn-sm me-2">Anotarme</button>
+                                            </form>
+                                            @if (User.IsInRole("admin"))
+                                            {
+                                                <a asp-controller="tarea" asp-action="edit" asp-route-id="@item.Id" class="btn btn-secondary btn-sm">Editar</a>
+                                            }
+                                        </div>
+                                        <div class="mt-2">
+                                            <span class="badge bg-success">@item.FechaEntrega.ToShortDateString()</span>
+                                        </div>
+                                    </div>
                                 </div>
-
-                                <p class="mb-auto">@item.Descripcion</p>
-
-                            </div>
-
-                            <div class="col-auto d-none d-lg-block">
-                                <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                                <div class="col-md-4">
+                                    <div class="card-body">
+                                        <p class="mb-auto">@item.Descripcion</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+
                 }
 
             </div>
