@@ -30,9 +30,14 @@
         </div>
 
         <div class="col-md-4">
-            <h3 class="my-3">Description</h3>
+            @if (User.IsInRole("admin"))
+            {
+                <a asp-controller="sede" asp-action="edit" asp-route-id="@Model.Sede.Id" type="button" class="btn btn-sm btn-outline-secondary">Editar @Model.Sede.Nombre</a>
+            }
+
+            <h3 class="my-3">Descripción</h3>
             <p>@Model.Sede.Descripcion</p>
-            <h4 class="my-3">Location</h4>
+            <h4 class="my-3">Ubicación</h4>
             <span>@Model.Sede.Direccion.Calle</span>, <span>@Model.Sede.Direccion.Ciudad</span>, <span>@Model.Sede.Direccion.Estado</span>
 
         </div>
@@ -136,14 +141,26 @@
                                             }
                                             <p class="card-text">@item.Descripcion</p>
                                             <div class="d-flex justify-content-start align-items-center">
-                                                <form asp-controller="Tarea" asp-action="Me" method="post">
-                                                    <input type="hidden" name="idTarea" value="@item.Id" />
-                                                    <input type="hidden" name="returnUrl" value="@Context.Request.Path.Value" />
-                                                    <button type="submit" class="btn btn-primary btn-sm me-2">Anotarme</button>
-                                                </form>
+                                                @{
+                                                    if (User.Identity.IsAuthenticated)
+                                                    {
+                                                        var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+                                                        if (item.IdUser == null || item.IdUser == userId)
+                                                        {
+                                                            <form asp-controller="Tarea" asp-action="Me" method="post">
+                                                                <input type="hidden" name="idTarea" value="@item.Id" />
+                                                                <input type="hidden" name="returnUrl" value="@Context.Request.Path.Value" />
+                                                                <button type="submit" id="btn-tarea-@item.Id" class="btn btn-sm me-2 @((item.IdUser != null) ? "btn-danger" : "btn-primary")">
+                                                                    @((item.IdUser != null) ? "Desanotarme" : "Anotarme")
+                                                                </button>
+                                                            </form>
+                                                        }
+
+                                                    }
+                                                }
                                                 @if (User.IsInRole("admin"))
                                                 {
-                                                    <a asp-controller="tarea" asp-action="edit" asp-route-id="@item.Id" class="btn btn-secondary btn-sm">Editar</a>
+                                                    <a asp-controller="tarea" asp-action="edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Editar</a>
                                                 }
                                             </div>
                                             <div class="mt-2">

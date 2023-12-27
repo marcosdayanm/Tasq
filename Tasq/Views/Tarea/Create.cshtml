@@ -10,7 +10,14 @@
 </title>
 
 
-<h1>Crear una Tarea en el Departamento @Model.NombreDepartamento </h1>
+@{
+    var date = DateTime.Now.ToString("yyyy-MM-ddTHH:mm");
+}
+
+
+
+
+<h1>Crear una Tarea en @Model.NombreDepartamento</h1>
 
 <br>
 <br>
@@ -38,7 +45,7 @@
 
     <div class="form-group">
         <label asp-for="FechaEntrega">Fecha de Entrega</label>
-        <input asp-for="FechaEntrega" type="datetime-local" class="form-control" placeholder="Fecha de Entrega">
+        <input asp-for="FechaEntrega" type="datetime-local" min="@date" value="@date" class="form-control" placeholder="Fecha de Entrega">
         <span asp-validation-for="FechaEntrega" class="text.danger"></span>
     </div>
 

@@ -103,7 +103,7 @@ namespace Tasq.Controllers
         {
             if (!ModelState.IsValid)
             {
-                ModelState.AddModelError("", "Failed to edit club");
+                ModelState.AddModelError("", "Error al editar Trarea");
                 return View("Edit", tareaVM);
             }
 
@@ -136,7 +136,13 @@ namespace Tasq.Controllers
             var tarea = await _tareaR.GetByIdAsync(idTarea);
             if (tarea == null) return View("Error");
 
-            tarea.IdUser = Iduser;
+            //tarea.IdUser = Iduser;
+
+
+            // Asignar o desasignar la tarea
+            if (tarea.IdUser == Iduser) tarea.IdUser = null;
+            else tarea.IdUser = Iduser;
+
             _tareaR.Update(tarea);
 
             // Así se saca la url de la página en donde estabamos

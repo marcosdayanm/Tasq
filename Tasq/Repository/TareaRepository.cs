@@ -30,7 +30,7 @@ namespace Tasq.Repository
 
         public async Task<IEnumerable<Tarea>> GetAll()
         {
-            return await _context.Tareas.Include(i => i.User).Include(j => j.Departamento).OrderBy(t => t.FechaEntrega).ToListAsync();
+            return await _context.Tareas.Include(i => i.User).Include(j => j.Departamento).ThenInclude(d => d.Sede).OrderBy(t => t.FechaEntrega).ToListAsync();
         }
 
         public Task<IEnumerable<Tarea>> GetAllAsyncNoTracking()
@@ -45,7 +45,7 @@ namespace Tasq.Repository
 
         public async Task<Tarea> GetByIdAsync(int id)
         {
-            return await _context.Tareas.FindAsync(id);
+            return await _context.Tareas.Include(j => j.Departamento).ThenInclude(d => d.Sede).FirstOrDefaultAsync(t => t.Id == id);
         }
 
         public Task<Tarea> GetByIdAsyncNoTracking(int id)

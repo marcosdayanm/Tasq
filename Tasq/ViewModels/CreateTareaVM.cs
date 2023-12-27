@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Tasq.Models;
 
 namespace Tasq.ViewModels
 {
@@ -13,6 +14,7 @@ namespace Tasq.ViewModels
         public string? Descripcion { get; set; }
         public int IdDepartamento { get; set; }
         public string? NombreDepartamento { get; set; }
+        public Departamento? Departamento { get; set; }
 
         [Required(ErrorMessage = "Fecha de entrega es Requerida")]
         public DateTime FechaEntrega { get; set; }

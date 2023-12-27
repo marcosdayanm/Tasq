@@ -38,7 +38,7 @@ namespace Tasq.Data
                     var newAdminUser = new AppUser()
                     {
                         Nombre = "Marcos",
-                        UserName = "marcos",
+                        UserName = "marcos@tasq.com",
                         Email = "marcos@tasq.com",
                         EmailConfirmed = true,
                         Direccion = new Direccion()
@@ -61,7 +61,7 @@ namespace Tasq.Data
                     var newAdminUser2 = new AppUser()
                     {
                         Nombre = "Santiago",
-                        UserName = "santiago",
+                        UserName = "santiago@tasq.com",
                         Email = "santiago@tasq.com",
                         EmailConfirmed = true,
                         Direccion = new Direccion()
@@ -85,7 +85,7 @@ namespace Tasq.Data
                     var newAdminUser3 = new AppUser()
                     {
                         Nombre = "Admin",
-                        UserName = "admin",
+                        UserName = "admin@tasq.com",
                         Email = "admin@tasq.com",
                         EmailConfirmed = true,
                         Direccion = new Direccion()

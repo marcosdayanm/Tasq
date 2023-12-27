@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Tasq.Models;
+using Tasq.ViewModels;
 
 namespace Tasq.Controllers;
 
@@ -18,15 +19,45 @@ public class HomeController : Controller
         return RedirectToAction("Index", "Sede");
     }
 
-    public IActionResult Privacy()
+
+
+    //public IActionResult Privacy()
+    //{
+    //    return View();
+    //}
+
+
+
+    [Route("Home/Error/{statusCode?}")]
+    public IActionResult Error(int? statusCode = null)
     {
-        return View();
+        var viewModel = new ErrorViewModel
+        {
+            RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+            StatusCode = statusCode
+        };
+
+        if (statusCode.HasValue)
+        {
+            if (statusCode == 404)
+            {
+                viewModel.Message = "Página no encontrada.";
+            }
+            else if (statusCode == 500)
+            {
+                viewModel.Message = "Error interno del servidor.";
+            }
+            // Agrega más casos según sea necesario
+        }
+        else
+        {
+            viewModel.Message = "Ocurrió un error inesperado.";
+        }
+
+        return View("Error", viewModel);
     }
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-    }
+
+
 }
 

@@ -57,13 +57,20 @@ if (args.Length == 1 && args[0].ToLower() == "seeddata")
 
 
 
+// Para que salga tambipen mi pagina de error en development
+if (app.Environment.IsDevelopment())
+{ 
+    app.UseExceptionHandler("/Home/Error"); // Comentar para probar la página de error personalizada en desarrollo
+    app.UseStatusCodePagesWithReExecute("/Home/Error/{0}");
+}
+
 
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseStatusCodePagesWithReExecute("/Home/Error/{0}");
     app.UseHsts();
 }
 
