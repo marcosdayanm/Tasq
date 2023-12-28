@@ -44,7 +44,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="FechaNacimiento">Fecha de Nacimiento</label>
+                        <label asp-for="FechaNacimiento">Fecha de Nacimiento (Opcional)</label>
                         <input asp-for="FechaNacimiento" type="datetime-local" class="form-control">
                         <span asp-validation-for="FechaNacimiento" class="text.danger"></span>
                     </div>
@@ -92,6 +92,12 @@
                         <a class="btn btn-outline-secondary" asp-controller="Account" asp-action="Register">Cancel</a>
                     </div>
                 </form>
+                <div>
+                    <br />
+                    <br />
+                    <p>¿Ya tienes una cuenta? <a asp-controller="Account" asp-action="Login">¡Haz Log In!</a></p>
+                </div>
+                
             </div>
         </div>
     </div>

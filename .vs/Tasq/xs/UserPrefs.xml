@@ -1,45 +1,52 @@
 ﻿<Properties StartupConfiguration="{BC2830F7-8AE2-45E6-A6C0-453639346390}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Tasq/Controllers/UserController.cs">
+  <MonoDevelop.Ide.ItemProperties.Tasq PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Tasq/Program.cs">
     <Files>
-      <File FileName="Tasq/Program.cs" Line="69" Column="1" />
-      <File FileName="Tasq/Views/Shared/_Layout.cshtml" Line="63" Column="13" />
-      <File FileName="Tasq/Controllers/AccountController.cs" Line="15" Column="23" />
-      <File FileName="Tasq/Views/Home/Index.cshtml" Line="1" Column="1" />
-      <File FileName="Tasq/Controllers/HomeController.cs" Line="12" Column="6" />
-      <File FileName="Tasq/Controllers/DepartamentoController.cs" Line="12" Column="13" />
-      <File FileName="Tasq/Controllers/SedeController.cs" Line="15" Column="25" />
-      <File FileName="Tasq/Controllers/TareaController.cs" Line="1" Column="1" />
-      <File FileName="Tasq/Controllers/UserController.cs" Line="12" Column="1" />
+      <File FileName="Tasq/Program.cs" Line="80" Column="35" />
+      <File FileName="../../../ASP.NET_Teddy/RunGroupWebApp/notes.md" Line="88" Column="16" />
+      <File FileName="Tasq/Models/AppUser.cs" Line="22" Column="40" />
+      <File FileName="Tasq/Repository/TareaRepository.cs" Line="85" Column="1" />
+      <File FileName="Tasq/Data/ApplicationDbContext.cs" Line="16" Column="1" />
+      <File FileName="Tasq/appsettings.json" Line="9" Column="6" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="Tasq" expanded="True">
+          <Node name="Tasq">
             <Node name="Tasq">
-              <Node name="Controllers">
-                <Node name="UserController.cs" selected="True" />
-              </Node>
+              <Node name="Controllers" expanded="True" />
+              <Node name="Interfaces" expanded="True" />
+              <Node name="Migrations" expanded="True" />
+              <Node name="Models" expanded="True" />
+              <Node name="Repository" expanded="True" />
               <Node name="ViewModels" expanded="True" />
               <Node name="Views" expanded="True">
                 <Node name="Account" expanded="True" />
                 <Node name="Departamento" expanded="True" />
                 <Node name="Home" expanded="True" />
+                <Node name="Sede" expanded="True" />
                 <Node name="Shared" expanded="True">
                   <Node name="_Layout.cshtml" expanded="True" />
                 </Node>
+                <Node name="Tarea" expanded="True" />
                 <Node name="User" expanded="True" />
               </Node>
+              <Node name="wwwroot" expanded="True">
+                <Node name="css" expanded="True" />
+                <Node name="js" expanded="True" />
+              </Node>
+              <Node name="appsettings.json" expanded="True" />
+              <Node name="Program.cs" selected="True" />
             </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.Tasq PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MultiItemStartupConfigurations />
 </Properties>

@@ -90,7 +90,7 @@
                                     <form asp-controller="Tarea" asp-action="Me" method="post">
                                         <input type="hidden" name="idTarea" value="@item.Id" />
                                         <input type="hidden" name="returnUrl" value="@Context.Request.Path.Value" />
-                                        <button type="submit" class="btn btn-primary btn-sm me-2">Anotarme</button>
+                                        <button type="submit" class="btn btn-danger btn-sm me-2">Desanotarme</button>
                                     </form>
                                     @if (User.IsInRole("admin"))
                                     {

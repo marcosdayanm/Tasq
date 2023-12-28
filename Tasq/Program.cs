@@ -18,6 +18,7 @@ using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Events;
 
+using Microsoft.EntityFrameworkCore;
 
 
 
@@ -65,10 +66,23 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 
 // Conectar db, en este caso de Sqlite3
+//builder.Services.AddDbContext<ApplicationDbContext>(options =>
+//{
+//    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
+//});
+
+
+
+
+// Conectar a la db, MySQL con Pomelo 6.0
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-{
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
+    options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
+        new MySqlServerVersion(new Version(5, 7, 0)))); // Ajusta la versión según tu servidor MySQL
+
+
+
+
+
 
 
 // Identificación y usuarios
@@ -87,7 +101,7 @@ var app = builder.Build();
 // Seed data
 if (args.Length == 1 && args[0].ToLower() == "seeddata")
 {
-    // await Seed.SeedUsersAndRolesAsync(app); // Usuarios y Roles
+    await Seed.SeedUsersAndRolesAsync(app); // Usuarios y Roles
     // Seed.SeedData(app); // Info a las db
 }
 

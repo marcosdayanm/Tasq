@@ -42,7 +42,7 @@ namespace Tasq.Data
                         FechaNacimiento = new DateTime(2003, 4, 4, 0, 0, 0),
                         Email = "marcos@tasq.com",
                         EmailConfirmed = true,
-                        IdSede = 11,
+                        IdSede = 1,
 
 
                     };
@@ -60,8 +60,7 @@ namespace Tasq.Data
                         UserName = "santiago@tasq.com",
                         Email = "santiago@tasq.com",
                         EmailConfirmed = true,
-                        IdSede = 12,
-
+                        IdSede = 2,
                     };
                     await userManager.CreateAsync(newAdminUser2, "Admin00*");
                     await userManager.AddToRoleAsync(newAdminUser2, UserRoles.Admin);
@@ -69,21 +68,21 @@ namespace Tasq.Data
 
 
 
-                var adminUser3 = await userManager.FindByEmailAsync("admin@tasq.com");
-                if (adminUser3 == null)
-                {
-                    var newAdminUser3 = new AppUser()
-                    {
-                        Nombre = "Admin",
-                        UserName = "admin@tasq.com",
-                        Email = "admin@tasq.com",
-                        EmailConfirmed = true,
+                //var adminUser3 = await userManager.FindByEmailAsync("admin@tasq.com");
+                //if (adminUser3 == null)
+                //{
+                //    var newAdminUser3 = new AppUser()
+                //    {
+                //        Nombre = "Admin",
+                //        UserName = "admin@tasq.com",
+                //        Email = "admin@tasq.com",
+                //        EmailConfirmed = true,
 
 
-                    };
-                    await userManager.CreateAsync(newAdminUser3, "Admin00*");
-                    await userManager.AddToRoleAsync(newAdminUser3, UserRoles.Admin);
-                }
+                //    };
+                //    await userManager.CreateAsync(newAdminUser3, "Admin00*");
+                //    await userManager.AddToRoleAsync(newAdminUser3, UserRoles.Admin);
+                //}
 
 
 

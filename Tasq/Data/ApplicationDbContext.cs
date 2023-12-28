@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore; // Se agregó esta picandole a DbContext
 using Tasq.Models;
@@ -11,7 +12,11 @@ namespace Tasq.Data
 {
 	public class ApplicationDbContext : IdentityDbContext<AppUser>
     {
-		public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+
+
+
+
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
 		}
 
