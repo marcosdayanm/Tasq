@@ -20,8 +20,6 @@ RUN dotnet publish "Tasq.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 
-# Para la base de datos
-COPY ./db_sqlite3.db /app/
 
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "Tasq.dll"]
