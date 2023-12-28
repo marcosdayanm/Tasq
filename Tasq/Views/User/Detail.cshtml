@@ -1,0 +1,122 @@
+﻿@using Tasq.ViewModels
+@model UserVM
+
+
+<br />
+<h1>Detalles de @Model.Nombre</h1>
+<br />
+<br />
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 mb-4 mb-sm-5">
+            <div class="card card-style1 border-0">
+                <div class="card-body p-1-9 p-sm-2-3 p-md-6 p-lg-7">
+                    <div class="row align-items-center">
+
+                        @if (Model.FotoUrl != null)
+                        {
+                            <div class="col-lg-6 mb-4 mb-lg-0">
+                                <img src="@Model.FotoUrl" width="300" height="auto" alt="...">
+                            </div>
+                        }
+
+                        <div class="col-lg-6 px-xl-10">
+                            <div class="bg-secondary d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded">
+                                <h3 class="h2 text-white mb-0">@Model.Nombre</h3>
+                            </div>
+                            <br />
+                            <ul class="list-unstyled mb-1-9">
+                                @if (Model.FormacionProfesional != null)
+                                {
+                                    <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Formación Profesional:</span> @Model.FormacionProfesional</li>
+                                }
+                                @if (Model.FechaNacimiento.HasValue)
+                                {
+                                    <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Fecha de Nacimiento:</span> @Model.FechaNacimiento.Value.ToShortDateString()</li>
+                                }
+                            <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Sede:</span> @(Model.Sede?.Nombre ?? "No especificado")</li>
+                                <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Email:</span> @Model.Email</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    @{
+        var tareas = await Model.Tareas;
+    }
+
+
+    @if (tareas != null)
+    {
+        <br />
+        <h1>Tareas anotadas</h1>
+        <br />
+
+        @foreach (var item in tareas)
+        {
+
+            <div class="col-12">
+                <div class="card mb-4 shadow-sm">
+                    <div class="row g-0">
+                        @if (item.FotoUrl != null)
+                        {
+                            <div class="col-md-4">
+                                <img src="@item.FotoUrl" alt="Imagen de @item.Nombre" class="img-fluid rounded-start">
+                            </div>
+                        }
+                        <div class="col-md-4">
+                            <div class="card-body">
+                                <h5 class="card-title">@item.Nombre</h5>
+                                <p class="card-text"><small class="text-muted">@item.Departamento.Nombre</small></p>
+                                @if (item.User != null)
+                                {
+                                    <p class="card-text">Responsable: <strong>@item.User.Nombre</strong></p>
+                                }
+                                else
+                                {
+                                    <p class="card-text">Responsable: <strong>No asignado</strong></p>
+                                }
+                                <div class="d-flex justify-content-start align-items-center">
+                                    <form asp-controller="Tarea" asp-action="Me" method="post">
+                                        <input type="hidden" name="idTarea" value="@item.Id" />
+                                        <input type="hidden" name="returnUrl" value="@Context.Request.Path.Value" />
+                                        <button type="submit" class="btn btn-primary btn-sm me-2">Anotarme</button>
+                                    </form>
+                                    @if (User.IsInRole("admin"))
+                                    {
+                                        <a asp-controller="tarea" asp-action="edit" asp-route-id="@item.Id" class="btn btn-secondary btn-sm">Editar</a>
+                                    }
+                                </div>
+                                <div class="mt-2">
+                                    <span class="badge bg-success">@item.FechaEntrega.ToShortDateString()</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card-body">
+                                <p class="mb-auto">@item.Descripcion</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        }
+    }
+
+
+
+    </section>
+
+
+

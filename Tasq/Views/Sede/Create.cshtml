@@ -1,0 +1,65 @@
+﻿@using Tasq.ViewModels
+@model CreateSedeVM
+
+<title>
+    @{
+        ViewData["Title"] = "Sedes";
+    }
+</title>
+
+
+
+<h1>Crear una Sede</h1>
+
+<br>
+<br>
+
+<form method="post" asp-action="Create">
+
+    <div class="form-group">
+        <label asp-for="Nombre">Nombre</label>
+        <input asp-for="Nombre" class="form-control" placeholder="Nombre de la Sede">
+        <span asp-validation-for="Nombre" class="text.danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="FotoUrl">Foto</label>
+        <input asp-for="FotoUrl" class="form-control" placeholder="Imagen (URL)">
+        <span asp-validation-for="FotoUrl" class="text.danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Descripcion">Descripción</label>
+        <textarea asp-for="Descripcion" class="form-control" rows="4" placeholder="Descripción"></textarea>
+        <span asp-validation-for="Descripcion" class="text.danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Direccion.Calle">Calle</label>
+        <input asp-for="Direccion.Calle" class="form-control" placeholder="Inserta la Calle">
+        <span asp-validation-for="Direccion.Calle" class="text.danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Direccion.Ciudad">Ciudad</label>
+        <input asp-for="Direccion.Ciudad" class="form-control" placeholder="Inserta la Ciudad">
+        <span asp-validation-for="Direccion.Ciudad" class="text.danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Direccion.Estado">Estado</label>
+        <input asp-for="Direccion.Estado" class="form-control" placeholder="Inserta el Estado">
+        <span asp-validation-for="Direccion.Estado" class="text.danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Direccion.Pais">Pais</label>
+        <input asp-for="Direccion.Pais" class="form-control" placeholder="Inserta el País">
+        <span asp-validation-for="Direccion.Pais" class="text.danger"></span>
+    </div>
+
+    <br />
+
+    <button type="submit" class="btn btn-primary">Crear</button>
+</form>
+
