@@ -14,9 +14,13 @@
             <div class="card-body">
                 <!-- User's Image -->
                 <div class="row align-items-center">
-                    <div class="col-2">
-                        <img src="@user.FotoUrl" class="img-fluid rounded-circle" alt="User Image">
-                    </div>
+                    @if (user.FotoUrl != null)
+                    {
+                        <div class="col-2">
+                            <img src="@user.FotoUrl" width="auto" height="80" alt="User Image">
+                        </div>
+                    }
+
                     <!-- User's Info -->
                     <div class="col-md-7">
                         <h5 class="card-title">Nombre: @user.Nombre</h5>
