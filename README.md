@@ -52,9 +52,9 @@ Eliminar Departamentos: Los administradores pueden eliminar departamentos que ya
 ## Explorar Tareas:
 Visualiza todas las tareas disponibles, lo que te ofrece una comprensión clara de los proyectos en curso en los distintos departamentos.
 
-Asignar o Desasignar Tareas: Puedes tomar la responsabilidad de una tarea, lo cual es útil para la gestión eficiente de proyectos y carga de trabajo.
+Asignar o Desasignar Tareas: Todos los usuarios pueden tomar la responsabilidad de una tarea, lo cual es útil para la gestión eficiente de proyectos y carga de trabajo.
 
-Crear Tareas: Si eres un administrador o tienes permisos adecuados, puedes agregar nuevas tareas, asignándolas a departamentos específicos y estableciendo fechas de entrega.
+Crear Tareas: Todos los usuarios pueden agregar nuevas tareas, asignándolas a departamentos específicos y estableciendo fechas de entrega, solo los Administradores pueden editarlas o eliminarlas
 
 Editar Tareas: Como administrador, actualiza la información de las tareas existentes, como su descripción, fecha de entrega o asignación a diferentes departamentos o usuarios.
 
