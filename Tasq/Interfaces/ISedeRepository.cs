@@ -12,6 +12,7 @@ namespace Tasq.Interfaces
     {
         // Consultas a la database
         Task<IEnumerable<Sede>> GetAll();
+        Task<IEnumerable<Sede>> GetAllNoTracking();
         Task<Sede> GetByIdAsync(int id);
         Task<IEnumerable<Sede>> GetSedeByCity(string city);
         // Task<Sede> GetByIdAsyncNoTracking(int id);

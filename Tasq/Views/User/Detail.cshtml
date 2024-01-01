@@ -37,8 +37,10 @@
                                 {
                                     <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Fecha de Nacimiento:</span> @Model.FechaNacimiento.Value.ToShortDateString()</li>
                                 }
-                            <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Sede:</span> @(Model.Sede?.Nombre ?? "No especificado")</li>
+                                <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Sede:</span> @(Model.Sede?.Nombre ?? "No especificado")</li>
                                 <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Email:</span> @Model.Email</li>
+                                <li class="mb-2 mb-xl-3 display-28"><a asp-controller="user" asp-action="edit" asp-route-id="@Model.Id" max-size="100" class="btn btn-sm btn-outline-secondary">Editar Usuario</a></li>
+                                @*  <li class="mb-2 mb-xl-3 display-28"><a asp-controller="user" asp-action="Delete" max-size="100" class="btn btn-sm btn-danger">Eliminar Usuario</a></li> *@
                             </ul>
                         </div>
                     </div>
@@ -52,7 +54,7 @@
 
 
     @{
-        var tareas = await Model.Tareas;
+        var tareas = Model.Tareas;
     }
 
 
@@ -94,11 +96,12 @@
                                     </form>
                                     @if (User.IsInRole("admin"))
                                     {
-                                        <a asp-controller="tarea" asp-action="edit" asp-route-id="@item.Id" class="btn btn-secondary btn-sm">Editar</a>
+                                        <a asp-controller="tarea" asp-action="edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Editar</a>
                                     }
                                 </div>
                                 <div class="mt-2">
-                                    <span class="badge bg-success">@item.FechaEntrega.ToShortDateString()</span>
+                                    <span class="badge @((DateTime.Now > item.FechaEntrega) ? "bg-danger" : "bg-success")">@item.FechaEntrega.ToShortDateString()</span>
+
                                 </div>
                             </div>
                         </div>

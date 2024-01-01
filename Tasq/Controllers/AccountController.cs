@@ -4,9 +4,11 @@ using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity; // Para el manager
 using Microsoft.AspNetCore.Mvc;
 using Tasq.Data;
@@ -27,15 +29,18 @@ namespace Tasq.Controllers
         private readonly SignInManager<AppUser> _signInManager;
         private readonly ApplicationDbContext _context;
         private readonly ISedeRepository _sedeR;
+        private readonly IUserRepository _userR;
 
 
 
-        public AccountController(UserManager<AppUser> uM, SignInManager<AppUser> siM, ApplicationDbContext c, ISedeRepository sedeR)
+
+        public AccountController(UserManager<AppUser> uM, SignInManager<AppUser> siM, ApplicationDbContext c, ISedeRepository sedeR, IUserRepository userR)
         {
             _userManager = uM;
             _signInManager = siM;
             _context = c;
             _sedeR = sedeR;
+            _userR = userR;
         }
 
 
@@ -109,11 +114,7 @@ namespace Tasq.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterVM regVM)
         {
-
-
             if (!ModelState.IsValid) return RedirectToAction("Register");
-
-
 
             var user = await _userManager.FindByEmailAsync(regVM.Email); // Esta función regresa un objeto de Task<AppUser> entonces podemos validar si se regresó o se regresó null
             // En este caso queremos que no se encuentre porque se está haciendo register

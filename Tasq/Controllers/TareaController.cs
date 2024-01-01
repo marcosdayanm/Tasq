@@ -53,7 +53,7 @@ namespace Tasq.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateTareaVM tareaVM)
         {
-            if (!ModelState.IsValid) // Eso de ModelState es una clase en donde cuando postemaos data, corrobora si es que es válida para insertarla en la base de datos
+            if (!ModelState.IsValid)
             {
                 ModelState.AddModelError("", "La creación del Departamento no se pudo completar porque tuvo un error, intente de nuevo");
                 return View(tareaVM);
@@ -73,7 +73,7 @@ namespace Tasq.Controllers
             // Si es válido añadimos
             _tareaR.Add(tarea);
 
-            return RedirectToAction("Detail", "Departamento", new { id = tareaVM.IdDepartamento }); // El parámetro que necesita el Método Detail del Controlador de Sede
+            return RedirectToAction("Detail", "Departamento", new { id = tareaVM.IdDepartamento }); 
         }
 
 
@@ -138,7 +138,6 @@ namespace Tasq.Controllers
 
             //tarea.IdUser = Iduser;
 
-
             // Asignar o desasignar la tarea
             if (tarea.IdUser == Iduser) tarea.IdUser = null;
             else tarea.IdUser = Iduser;
@@ -164,7 +163,7 @@ namespace Tasq.Controllers
 
             var departamentoId = tarea.IdDepartamento;
 
-            _tareaR.Delete(tarea); // Acá solo se pasa el club y en Entity Framework va a hacer todo el trabajo por nosotros
+            _tareaR.Delete(tarea); 
 
             return RedirectToAction("Detail", "Departamento", new { id = departamentoId });
         }

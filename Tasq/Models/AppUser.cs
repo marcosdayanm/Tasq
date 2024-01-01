@@ -18,7 +18,7 @@ namespace Tasq.Models
 
         // FK a Sede
         [ForeignKey("Sede")]
-        public int? IdSede { get; set; }
+        public int IdSede { get; set; }
         public Sede? Sede { get; set; }
 
         // FK a Departamento

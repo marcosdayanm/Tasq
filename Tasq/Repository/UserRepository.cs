@@ -22,7 +22,8 @@ namespace Tasq.Repository
 
         public bool Delete(AppUser user)
         {
-            throw new NotImplementedException();
+            _context.Remove(user);
+            return Save();
         }
 
         public async Task<IEnumerable<AppUser>> GetAllUsers()
@@ -48,6 +49,11 @@ namespace Tasq.Repository
         public async Task<AppUser> GetUserById(string id)
         {
             return await _context.Users.Include(u => u.Sede).FirstOrDefaultAsync(u => u.Id == id);
+        }
+
+        public async Task<AppUser> GetUserByIdNoTracking(string id)
+        {
+            return await _context.Users.AsNoTracking().Include(u => u.Sede).FirstOrDefaultAsync(u => u.Id == id);
         }
 
         public bool Save()

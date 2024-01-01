@@ -7,6 +7,7 @@ namespace Tasq.Interfaces
 	{
         Task<IEnumerable<AppUser>> GetAllUsers();
         Task<AppUser> GetUserById(string id);
+        Task<AppUser> GetUserByIdNoTracking(string id);
         Task<IEnumerable<AppUser>> GetAllUsersByCity(string city);
         Task<IEnumerable<AppUser>> GetAllUsersByIdSede(int id);
         Task<IEnumerable<AppUser>> GetAllUsersByIdDepartamento(int id);

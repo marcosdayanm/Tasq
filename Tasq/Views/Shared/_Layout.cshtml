@@ -12,17 +12,6 @@
 
 
 
-@if (User.Identity.IsAuthenticated)
-    {
-        var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
-        var userEmail = User.FindFirst(System.Security.Claims.ClaimTypes.Email)?.Value;
-        var userRole = User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value;
-    }
-
-
-
-
-
 <body class="">
     <header>
         <nav class="navbar navbar-dark bg-dark taxt-white navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3 fixed-top">
@@ -37,30 +26,34 @@
                     </ul>
 
                     @if (User.Identity.IsAuthenticated)
-                    {
+                        {
+                            var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+                            var userEmail = User.FindFirst(System.Security.Claims.ClaimTypes.Email)?.Value;
+                            var userRole = User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value;
+
                         <ul class="navbar-nav me-auto">
 
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Sede" asp-action="Index">Sedes</a>
+                                <a class="nav-link" asp-area="" asp-controller="sede" asp-action="Index">Sedes</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Departamento" asp-action="Index">Departamentos</a>
+                                <a class="nav-link" asp-area="" asp-controller="departamento" asp-action="Index">Departamentos</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Tarea" asp-action="Index">Tareas</a>
+                                <a class="nav-link" asp-area="" asp-controller="tarea" asp-action="Index">Tareas</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="User" asp-action="Index">Usuarios</a>
+                                <a class="nav-link" asp-area="" asp-controller="user" asp-action="Index">Usuarios</a>
                             </li>
 
                         </ul>
 
                         <ul class="navbar-nav ms-auto">
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="User" asp-action="Detail"> hola, @await Component.InvokeAsync("User") </a>
+                                <a class="nav-link" asp-area="" asp-controller="user" asp-action="detail" asp-route-id="@userId"> hola, @await Component.InvokeAsync("User") </a>
                             </li>
 
                             <li class="nav-item">

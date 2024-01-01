@@ -33,6 +33,11 @@ namespace Tasq.Repository
             return await _context.Sedes.ToListAsync();
         }
 
+        public async Task<IEnumerable<Sede>> GetAllNoTracking()
+        {
+            return await _context.Sedes.AsNoTracking().ToListAsync();
+        }
+
         public async Task<Sede> GetByIdAsync(int id)
         {
             // Es importante siempre con las FK poner el include, ya que sinó no serán traídos los datos de esa fk, es como si ejecutaramos un JOIN
