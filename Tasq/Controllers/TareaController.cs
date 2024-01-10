@@ -67,7 +67,8 @@ namespace Tasq.Controllers
                 FotoUrl = tareaVM.FotoUrl,
                 IdDepartamento = tareaVM.IdDepartamento,
                 FechaCreacion = DateTime.Now,
-                FechaEntrega = tareaVM.FechaEntrega
+                FechaEntrega = tareaVM.FechaEntrega,
+                Prioridad = 1
             };
 
             // Si es válido añadimos
@@ -148,10 +149,32 @@ namespace Tasq.Controllers
             var refererUrl = Request.Headers["Referer"].ToString();
 
             if (!string.IsNullOrEmpty(refererUrl) && Url.IsLocalUrl(returnUrl)) return Redirect(returnUrl);
-
-            else return RedirectToAction("Index", "Sede");
+            else return RedirectToAction("Index", "Tarea");
 
         }
+
+
+
+        [HttpPost]
+        public async Task<IActionResult> Status(int idTarea, string returnUrl)
+        {
+            var tarea = await _tareaR.GetByIdAsync(idTarea);
+            if (tarea == null) return View("Error");
+
+            if (tarea.Prioridad != 0)
+            {
+                tarea.Prioridad = 0;
+                tarea.FechaEntrega = DateTime.Now;
+            }
+
+
+            _tareaR.Update(tarea);
+            var refererUrl = Request.Headers["Referer"].ToString();
+            if (!string.IsNullOrEmpty(refererUrl) && Url.IsLocalUrl(returnUrl)) return Redirect(returnUrl);
+            else return RedirectToAction("Index", "Tarea");
+
+        }
+
 
 
         [HttpPost, ActionName("Delete")]

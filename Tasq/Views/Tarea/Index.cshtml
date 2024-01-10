@@ -11,7 +11,7 @@
 
 
 
-<h1>Todas las Tareas</h1>
+<h1>Todas las Tareas Pendientes</h1>
 
 
 <div class="album py-5 bg-body-tertiary">
@@ -21,6 +21,7 @@
 
             @foreach (var item in Model)
             {
+                if (item.Prioridad == 0) continue;
 
                 <div class="col-12">
                     <div class="card mb-4 shadow-sm">
@@ -28,7 +29,7 @@
                             @if (item.FotoUrl != null)
                             {
                                 <div class="col-md-4">
-                                    <img src="@item.FotoUrl" alt="Imagen de @item.Nombre" class="img-fluid rounded-start">
+                                    <img src="@item.FotoUrl" alt="Imagen de @item.Nombre" height="207px" width="auto" class="rounded-start">
                                 </div>
                             }
                             <div class="col-md-4">
@@ -43,11 +44,12 @@
                                     {
                                         <p class="card-text">Responsable: <strong>No asignado</strong></p>
                                     }
-                                <div class="d-flex justify-content-start align-items-center">
 
-                                    @{
-                                        if (User.Identity.IsAuthenticated)
-                                        {
+
+                                    @* Botones de acción de las tareas *@
+                                    <div class="d-flex justify-content-start align-items-center">
+
+                                        @{
                                             var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
                                             if (item.IdUser == null || item.IdUser == userId || User.IsInRole("admin"))
                                             {
@@ -55,24 +57,40 @@
                                                     <input type="hidden" name="idTarea" value="@item.Id" />
                                                     <input type="hidden" name="returnUrl" value="@Context.Request.Path.Value" />
                                                     <button type="submit" id="btn-tarea-@item.Id" class="btn btn-sm me-2 @((item.IdUser != null) ? "btn-danger" : "btn-primary")">
-                                                        @((item.IdUser != null) ? "Desanotarme" : "Anotarme")
+                                                        @((item.IdUser != null || item.IdUser == userId) ? "Desanotarme" : "Anotarme")
+                                                    </button>
+                                                </form>
+                                            }
+
+
+                                            if (User.IsInRole("admin"))
+                                            {
+                                                <a asp-controller="tarea" asp-action="edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Editar</a>
+                                            }
+
+
+                                            @* Marcar como terminada *@
+                                            if (User.IsInRole("admin") || userId == item.IdUser)
+                                            {
+                                                <form asp-controller="Tarea" asp-action="Status" method="post">
+                                                    <input type="hidden" name="idTarea" value="@item.Id" />
+                                                    <input type="hidden" name="returnUrl" value="@Context.Request.Path.Value" />
+                                                    <button type="submit" id="btn-tarea-@item.Id" class="btn btn-sm ms-2 me-2 btn-success">
+                                                        Terminada
                                                     </button>
                                                 </form>
                                             }
 
                                         }
-                                    }
+
+                                    </div>
 
 
-                                    @if (User.IsInRole("admin"))
-                                    {
-                                        <a asp-controller="tarea" asp-action="edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Editar</a>
-                                    }
-                                </div>
-                                <div class="mt-2">
-                                    <span class="badge @((DateTime.Now > item.FechaEntrega) ? "bg-danger" : "bg-success")">@item.FechaEntrega.ToShortDateString()</span>
 
-                                </div>
+                                    <div class="mt-2">
+                                        <span class="badge @((DateTime.Now > item.FechaEntrega) ? "bg-danger" : "bg-success")">@item.FechaEntrega.ToShortDateString()</span>
+
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -90,4 +108,74 @@
         </div>
     </div>
 </div>
+
+
+
+<br />
+<br />
+
+
+<h1>Todas las Tareas Terminadas</h1>
+
+
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+        <div class="row row-cols-1">
+
+
+            @foreach (var item in Model)
+            {
+                if (item.Prioridad != 0) continue;
+
+                <div class="col-12">
+                    <div class="card mb-4 shadow-sm">
+                        <div class="row g-0">
+                            @if (item.FotoUrl != null)
+                            {
+                                <div class="col-md-4">
+                                    <img src="@item.FotoUrl" alt="Imagen de @item.Nombre" height="207px" width="auto" class="rounded-start">
+                                </div>
+                            }
+                            <div class="col-md-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">@item.Nombre</h5>
+                                    <p class="card-text"><small class="text-muted">@item.Departamento.Nombre - @item.Departamento.Sede.Nombre</small></p>
+                                    @if (item.User != null)
+                                    {
+                                        <p class="card-text">Responsable: <strong>@item.User.Nombre</strong></p>
+                                    }
+                                    else
+                                    {
+                                        <p class="card-text">Responsable: <strong>No asignado</strong></p>
+                                    }
+                                    <div class="d-flex justify-content-start align-items-center">
+
+
+                                        @if (User.IsInRole("admin"))
+                                        {
+                                            <a asp-controller="tarea" asp-action="edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Editar</a>
+                                        }
+
+                                    </div>
+                                    <div class="mt-2">
+                                        Terminada en: <span class="badge bg-success">@item.FechaEntrega.ToShortDateString()</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card-body">
+                                    <p class="mb-auto">@item.Descripcion</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+
+
+        </div>
+    </div>
+</div>
+
 
