@@ -114,7 +114,27 @@ namespace Tasq.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterVM regVM)
         {
-            if (!ModelState.IsValid) return RedirectToAction("Register");
+            if (!ModelState.IsValid)
+            {
+                TempData["Error"] = "Error al crear una cuenta, intente de nuevo";
+
+                IEnumerable<Sede> sedes = await _sedeR.GetAll();
+                var response = new RegisterVM()
+                {
+                    Nombre = regVM.Nombre,
+                    Email = regVM.Email,
+                    FechaNacimiento = regVM.FechaNacimiento,
+                    FormacionProfesional = regVM.FormacionProfesional,
+                    FotoUrl = regVM.FotoUrl,
+                    SedeSeleccionadaId = regVM.SedeSeleccionadaId,
+                    Sedes = sedes,
+                    Password = regVM.Password,
+                    ConfirmPassword = regVM.ConfirmPassword,
+                };
+
+                return View(response);
+            }
+                
 
             var user = await _userManager.FindByEmailAsync(regVM.Email); // Esta función regresa un objeto de Task<AppUser> entonces podemos validar si se regresó o se regresó null
             // En este caso queremos que no se encuentre porque se está haciendo register
@@ -141,6 +161,7 @@ namespace Tasq.Controllers
                 await _userManager.AddToRoleAsync(newUser, UserRoles.User); // Ésto es poara ponerle el rol de usuario
 
 
+
             if (!newUserResponse.Succeeded)
             {
                 var errorMessage = new StringBuilder();
@@ -154,7 +175,7 @@ namespace Tasq.Controllers
                     Debug.WriteLine($"Error: {error.Code}, {error.Description}");
                 }
 
-                // Asignar el mensaje de error a TempData["Error"]
+        
                 TempData["Error"] = errorMessage.ToString();
 
 
@@ -178,7 +199,9 @@ namespace Tasq.Controllers
             var result = await _signInManager.PasswordSignInAsync(newUser, logVM.Password, false, false);
 
             if (result.Succeeded) return RedirectToAction("Index", "Sede");
-            return RedirectToAction("Register");
+
+            TempData["Error"] = "Error al crear una cuenta, intente de nuevo";
+            return View(regVM);
 
 
         }

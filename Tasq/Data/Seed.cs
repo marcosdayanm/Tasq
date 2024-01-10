@@ -68,39 +68,39 @@ namespace Tasq.Data
 
 
 
-                var adminUser3 = await userManager.FindByEmailAsync("admin@tasq.com");
-                if (adminUser3 == null)
-                {
-                    var newAdminUser3 = new AppUser()
-                    {
-                        Nombre = "Admin",
-                        UserName = "admin@tasq.com",
-                        Email = "admin@tasq.com",
-                        EmailConfirmed = true,
-                        IdSede = 3,
+                //var adminUser3 = await userManager.FindByEmailAsync("admin@tasq.com");
+                //if (adminUser3 == null)
+                //{
+                //    var newAdminUser3 = new AppUser()
+                //    {
+                //        Nombre = "Admin",
+                //        UserName = "admin@tasq.com",
+                //        Email = "admin@tasq.com",
+                //        EmailConfirmed = true,
+                //        IdSede = 3,
 
-                    };
-                    await userManager.CreateAsync(newAdminUser3, "Admin00*");
-                    await userManager.AddToRoleAsync(newAdminUser3, UserRoles.Admin);
-                }
+                //    };
+                //    await userManager.CreateAsync(newAdminUser3, "Admin00*");
+                //    await userManager.AddToRoleAsync(newAdminUser3, UserRoles.Admin);
+                //}
 
 
 
-                var adminUser4 = await userManager.FindByEmailAsync("admin2@tasq.com");
-                if (adminUser4 == null)
-                {
-                    var newAdminUser4 = new AppUser()
-                    {
-                        Nombre = "Admin2",
-                        UserName = "admin2@tasq.com",
-                        Email = "admin2@tasq.com",
-                        EmailConfirmed = true,
-                        IdSede = 1,
+                //var adminUser4 = await userManager.FindByEmailAsync("admin2@tasq.com");
+                //if (adminUser4 == null)
+                //{
+                //    var newAdminUser4 = new AppUser()
+                //    {
+                //        Nombre = "Admin2",
+                //        UserName = "admin2@tasq.com",
+                //        Email = "admin2@tasq.com",
+                //        EmailConfirmed = true,
+                //        IdSede = 1,
 
-                    };
-                    await userManager.CreateAsync(newAdminUser4, "Admin00*");
-                    await userManager.AddToRoleAsync(newAdminUser4, UserRoles.Admin);
-                }
+                //    };
+                //    await userManager.CreateAsync(newAdminUser4, "Admin00*");
+                //    await userManager.AddToRoleAsync(newAdminUser4, UserRoles.Admin);
+                //}
 
             }
         }

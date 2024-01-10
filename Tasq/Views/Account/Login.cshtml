@@ -2,12 +2,12 @@
 @model LoginVM
 
 
-<h1>Log In</h1>
-
 @{
     ViewData["Title"] = "Log In";
 }
 
+
+<br />
 
 <div class="row">
     <div class="col-md-6 offset-3">
@@ -18,7 +18,7 @@
         @if (TempData["Error"] != null)@* Ésta es la validación de TempData que pusimos para que el usuario sepa si hubo un error o todo correcto *@
         {
             <div class="col-md-12 alert alert-danger">
-                <span><b>Sorry!</b> - @TempData["Error"]</span>
+                <span><b>Ocurrió un error!</b> - @TempData["Error"]</span>
             </div>
         }
 
