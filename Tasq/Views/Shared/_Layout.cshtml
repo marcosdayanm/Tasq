@@ -26,10 +26,10 @@
                     </ul>
 
                     @if (User.Identity.IsAuthenticated)
-                        {
-                            var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
-                            var userEmail = User.FindFirst(System.Security.Claims.ClaimTypes.Email)?.Value;
-                            var userRole = User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value;
+                    {
+                        var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+                        var userEmail = User.FindFirst(System.Security.Claims.ClaimTypes.Email)?.Value;
+                        var userRole = User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value;
 
                         <ul class="navbar-nav me-auto">
 
@@ -94,7 +94,7 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted"> 
+    <footer class="border-top footer text-muted">
         <div class="container">
             &copy; @DateTime.Now.Year - Tasq  @* <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> *@
         </div>
@@ -102,6 +102,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://kit.fontawesome.com/88fb767271.js" crossorigin="anonymous"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

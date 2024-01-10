@@ -32,13 +32,13 @@
 
                     <div class="form-group">
                         <label asp-for="Nombre" class="control-label"></label>
-                        <input asp-for="Nombre" class="form-control">
+                        <input asp-for="Nombre" autocomplete="off" class="form-control">
                         <span asp-validation-for="Nombre" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">
                         <label asp-for="Email" class="control-label"></label>
-                        <input asp-for="Email" class="form-control">
+                        <input asp-for="Email" autocomplete="off" class="form-control">
                         <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
 
@@ -64,30 +64,47 @@
 
                     <div class="form-group">
                         <label asp-for="FormacionProfesional" class="control-label"></label>
-                        <input asp-for="FormacionProfesional" class="form-control">
+                        <input asp-for="FormacionProfesional" autocomplete="off" class="form-control">
                         <span asp-validation-for="FormacionProfesional" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">
                         <label asp-for="FotoUrl" class="control-label"></label>
-                        <input asp-for="FotoUrl" class="form-control">
+                        <input asp-for="FotoUrl" autocomplete="off" class="form-control">
                         <span asp-validation-for="FotoUrl" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">
                         <label asp-for="Password" class="control-label"></label>
-                        <input asp-for="Password" class="form-control" />
+                        <div class="password-input-container">
+                            <input asp-for="Password" type="password" class="form-control password-input" id="password" onkeyup="validatePassword(this.value)" />
+                            <i class="pw-ojito fas fa-eye" onclick="pwOjito('password')"></i>
+                        </div>
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
 
+                    <ul id="password-indicator" class="password-indicator">
+                        <li><i class=""> Al menos 6 caracteres </i></li>
+                        <li><i class=""> Al menos 1 mayúscula </i></li>
+                        <li><i class=""> Al menos 1 minúscula </i></li>
+                        <li><i class=""> Al menos 1 número </i></li>
+                        <li><i class=""> Al menos 1 carácter no alfanumérico </i></li>
+                    </ul>
+
+
                     <div class="form-group">
                         <label asp-for="ConfirmPassword" class="control-label"></label>
-                        <input asp-for="ConfirmPassword" class="form-control" />
+                        <div class="password-input-container">
+                            <input asp-for="ConfirmPassword" type="password" class="form-control password-input" id="confirm-password" />
+                            <i class="pw-ojito fas fa-eye" onclick="pwOjito('confirm-password')"></i>
+                        </div>
                         <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                     </div>
+
+
                     <br />
                     <div class="form-group">
-                        <input class="btn btn-outline-success float right" type="submit" value="Registrarme" />
+                        <input class="btn btn-outline-success float right" type="submit" id="submit" value="Registrarme" />
                         <a class="btn btn-outline-secondary" asp-controller="Account" asp-action="Register">Cancelar</a>
                     </div>
                 </form>

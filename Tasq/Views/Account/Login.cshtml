@@ -28,14 +28,19 @@
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
                         <label asp-for="Email" class="control-label"></label>
-                        <input asp-for="Email" class="form-control">
+                        <input asp-for="Email" autocomplete="off" class="form-control">
                         <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
+
                     <div class="form-group">
                         <label asp-for="Password" class="control-label"></label>
-                        <input asp-for="Password" class="form-control" />
+                        <div class="password-input-container">
+                            <input asp-for="Password" type="password" class="form-control password-input" id="password" onkeyup="validatePassword(this.value)" />
+                            <i class="pw-ojito fas fa-eye" onclick="pwOjito('password')"></i>
+                        </div>
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
+
                     <br />
                     <div class="form-group">
                         <input class="btn btn-outline-success float right" type="submit" value="Log in" />

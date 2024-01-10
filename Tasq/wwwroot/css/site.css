@@ -33,6 +33,47 @@ body {
 
 
 
-/*.btn-tarea {
-    max-width: 80px;
-}*/
+/* Para checar los criterios de la pw */
+.password-indicator {
+    list-style-type: none;
+    padding: 0;
+}
+
+.password-indicator li {
+    display: flex;
+    align-items: center;
+}
+
+.password-indicator li i {
+    margin-right: 5px;
+    color: red;
+}
+
+.password-indicator li.complete i {
+    color: green;
+}
+
+
+/* Para la visibilidad de la pw */
+.pw-ojito {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #666;
+}
+
+
+.password-input-container {
+    position: relative;
+}
+
+.pw-ojito {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #666;
+}
