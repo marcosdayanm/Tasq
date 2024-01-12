@@ -46,6 +46,7 @@ namespace Tasq.Controllers
                     Email = user.Email,
                     FechaNacimiento  = user.FechaNacimiento,
                     FormacionProfesional = user.FormacionProfesional,
+                    FotoUrl = user.FotoUrl,
                     IdSede = user.IdSede,
                     Sede = user.Sede,
                 };
@@ -85,6 +86,7 @@ namespace Tasq.Controllers
                 Email = user.Email,
                 FechaNacimiento = user.FechaNacimiento,
                 FormacionProfesional = user.FormacionProfesional != null ? user.FormacionProfesional : null,
+                FotoUrl = user.FotoUrl,
                 IdSede = user.IdSede,
                 Sede = user.Sede,
                 Tareas = tareas ?? new List<Tarea>(),

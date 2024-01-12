@@ -21,12 +21,15 @@
                 <div class="card-body">
 
                     <div class="row align-items-center">
+
+               
                         @if (u.FotoUrl != null)
                         {
                             <div class="col-2">
-                                <img src="@u.FotoUrl" width="auto" height="80" alt="User Image">
+                                <img src="@u.FotoUrl" class="img-userlist" role="img" width="auto" height="100" alt="User Image">
                             </div>
                         }
+                       
 
                         <div class="col-md-7">
                             <h5 class="card-title">Nombre: @u.Nombre</h5>
@@ -85,7 +88,7 @@
                     @if (user.FotoUrl != null)
                     {
                         <div class="col-2">
-                            <img src="@user.FotoUrl" width="auto" height="80" alt="User Image">
+                            <img src="@user.FotoUrl" class="img-userlist" role="img" width="auto" height="100" alt="User Image">
                         </div>
                     }
 

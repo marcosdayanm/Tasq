@@ -56,44 +56,24 @@ namespace Tasq.Controllers
         {
             if (!ModelState.IsValid) return View(logVM);
 
-            var user = await _userManager.FindByEmailAsync(logVM.Email); // Ésto trata de buscar en la DB si ya hay un usuario con éstas características
-
+            var user = await _userManager.FindByEmailAsync(logVM.Email);
             if (user != null)
             {
-                // User encontrado, validar pw
                 var passwordCheck = await _userManager.CheckPasswordAsync(user, logVM.Password);
                 if (passwordCheck)
                 {
-                    // Credenciales correctas, logging in
                     var result = await _signInManager.PasswordSignInAsync(user, logVM.Password, false, false);
-
-                    var claimsPrincipal = User as ClaimsPrincipal; // Esto obtiene el usuario autenticado actual
-                    var claimsList = claimsPrincipal.Claims.ToList(); // Aquí tienes todos los claims
-
-                    foreach (var claim in claimsList)
-                    {
-                        // Inspeccionar cada claim
-                        Console.WriteLine(claim.Type + ": " + claim.Value);
-                    }
-
-
                     if (result.Succeeded) return RedirectToAction("Index", "Sede");
 
                 }
 
-                // pw incorrecta
                 TempData["Error"] = "Contraseña incorrecta, intente de nuevo";
                 return View(logVM);
             }
 
-            // User no encontrado
             TempData["Error"] = "Usuario no encontrado, intente de nuevo";
             return View(logVM);
-
         }
-
-
-
 
 
 
@@ -195,6 +175,8 @@ namespace Tasq.Controllers
                 Password = regVM.Password,
             };
 
+
+            //return RedirectToAction("Login", "Account", new { logVM: logVM });
 
             var result = await _signInManager.PasswordSignInAsync(newUser, logVM.Password, false, false);
 

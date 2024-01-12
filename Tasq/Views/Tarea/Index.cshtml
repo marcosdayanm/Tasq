@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<Tarea>
-
+@using System.Security.Claims
 
 
 
@@ -10,17 +10,26 @@
 </title>
 
 
+@{
+    var uuserId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
 
-<h1>Todas las Tareas Pendientes</h1>
+    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center">
+        <h1>Todas las Tareas Pendientes</h1>
+        <a type="button" class="btn btn-primary" asp-controller="user" asp-action="detail" asp-route-id="@uuserId">Ver mis Tareas</a>
+    </div>
+ }
 
 
-<div class="album py-5 bg-body-tertiary">
-    <div class="container">
-        <div class="row row-cols-1">
 
 
-            @foreach (var item in Model)
-            {
+
+    <div class="album py-5 bg-body-tertiary">
+        <div class="container">
+            <div class="row row-cols-1">
+
+
+                @foreach (var item in Model)
+                {
                 if (item.Prioridad == 0) continue;
 
                 <div class="col-12">
@@ -28,9 +37,9 @@
                         <div class="row g-0">
                             @if (item.FotoUrl != null)
                             {
-                                <div class="col-md-4">
-                                    <img src="@item.FotoUrl" alt="Imagen de @item.Nombre" height="207px" width="auto" class="rounded-start">
-                                </div>
+                            <div class="col-md-4">
+                                <img src="@item.FotoUrl" alt="Imagen de @item.Nombre" height="207px" width="auto" class="rounded-start">
+                            </div>
                             }
                             <div class="col-md-4">
                                 <div class="card-body">
@@ -38,48 +47,82 @@
                                     <p class="card-text"><small class="text-muted">@item.Departamento.Nombre - @item.Departamento.Sede.Nombre</small></p>
                                     @if (item.User != null)
                                     {
-                                        <p class="card-text">Responsable: <strong>@item.User.Nombre</strong></p>
+                                    <p id="responsable-@item.Id" class="card-text">Responsable: <strong>@item.User.Email</strong></p>
                                     }
                                     else
                                     {
-                                        <p class="card-text">Responsable: <strong>No asignado</strong></p>
+                                    <p id="responsable-@item.Id" class="card-text">Responsable: <strong>No asignado</strong></p>
                                     }
+
 
 
                                     @* Botones de acción de las tareas *@
                                     <div class="d-flex justify-content-start align-items-center">
 
                                         @{
-                                            var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
-                                            if (item.IdUser == null || item.IdUser == userId || User.IsInRole("admin"))
-                                            {
-                                                <form asp-controller="Tarea" asp-action="Me" method="post">
-                                                    <input type="hidden" name="idTarea" value="@item.Id" />
-                                                    <input type="hidden" name="returnUrl" value="@Context.Request.Path.Value" />
-                                                    <button type="submit" id="btn-tarea-@item.Id" class="btn btn-sm me-2 @((item.IdUser != null) ? "btn-danger" : "btn-primary")">
-                                                        @((item.IdUser != null || item.IdUser == userId) ? "Desanotarme" : "Anotarme")
-                                                    </button>
-                                                </form>
-                                            }
+                                        var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+                                        var email = User.FindFirst(ClaimTypes.Email)?.Value;
+
+                                        if (item.IdUser == null || item.IdUser == userId || User.IsInRole("admin"))
+                                        {
+                                        @* Form que interactúa directo con Controller Tarea *@
+                                        @*
+                                        <form asp-controller="Tarea" asp-action="Me" method="post">
+                                            <input type="hidden" name="idTarea" value="@item.Id" />
+                                            <input type="hidden" name="returnUrl" value="@Context.Request.Path.Value" />
+                                            <button type="submit" id="btn-tarea-@item.Id" class="btn btn-sm me-2 @((item.IdUser != null) ? " btn-danger" : "btn-primary" )">
+                                                @((item.IdUser != null || item.IdUser == userId) ? "Desanotarme" : "Anotarme")
+                                            </button>
+                                        </form>
+                                        *@
 
 
-                                            if (User.IsInRole("admin"))
-                                            {
-                                                <a asp-controller="tarea" asp-action="edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Editar</a>
-                                            }
+                                        @* AJAX *@
+
+                                        <form id="tareaForm-@item.Id" data-id-tarea="@item.Id" data-url="@Url.Action("Me", "Tarea" )">
+                                            <input type="hidden" name="idTarea" value="@item.Id" />
+                                            <input type="hidden" name="returnUrl" value="@Context.Request.Path.Value" />
+                                            <button type="button"
+                                                    onclick="updateTarea(this, '@email')"
+                                                    id="btn-tarea-@item.Id"
+                                                    class="btn btn-sm me-2 @((item.IdUser != null || item.IdUser == userId) ? " btn-danger" : "btn-primary" )">
+                                                @((item.IdUser != null || item.IdUser == userId) ? "Desanotarme" : "Anotarme")
+                                            </button>
+                                        </form>
+                                        }
 
 
-                                            @* Marcar como terminada *@
-                                            if (User.IsInRole("admin") || userId == item.IdUser)
-                                            {
-                                                <form asp-controller="Tarea" asp-action="Status" method="post">
-                                                    <input type="hidden" name="idTarea" value="@item.Id" />
-                                                    <input type="hidden" name="returnUrl" value="@Context.Request.Path.Value" />
-                                                    <button type="submit" id="btn-tarea-@item.Id" class="btn btn-sm ms-2 me-2 btn-success">
-                                                        Terminada
-                                                    </button>
-                                                </form>
-                                            }
+                                        if (User.IsInRole("admin"))
+                                        {
+                                        <a asp-controller="tarea" asp-action="edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Editar</a>
+                                        }
+
+
+                                        @* Marcar como terminada *@
+
+                                        if (User.IsInRole("admin") || userId == item.IdUser)
+                                        {
+
+                                        <form asp-controller="Tarea" asp-action="Status" method="post">
+                                            <input type="hidden" name="idTarea" value="@item.Id" />
+                                            <input type="hidden" name="returnUrl" value="@Context.Request.Path.Value" />
+                                            <button type="submit" id="btn-tarea-@item.Id" class="btn btn-sm ms-2 me-2 btn-success">
+                                                Terminada
+                                            </button>
+                                        </form>
+
+
+                                        @* Para el AJAX *@
+                                        @*
+                                        <form id="statusForm-@item.Id" data-id-tarea="@item.Id" data-url="@Url.Action(" Status", "Tarea" )">
+                                            <input type="hidden" name="idTarea" value="@item.Id" />
+                                            <input type="hidden" name="returnUrl" value="@Context.Request.Path.Value" />
+                                            <button type="button" onclick="updateStatus(this)" class="btn btn-sm ms-2 me-2 btn-success">
+                                                Terminada
+                                            </button>
+                                        </form>
+                                        *@
+                                        }
 
                                         }
 
@@ -88,7 +131,7 @@
 
 
                                     <div class="mt-2">
-                                        <span class="badge @((DateTime.Now > item.FechaEntrega) ? "bg-danger" : "bg-success")">@item.FechaEntrega.ToShortDateString()</span>
+                                        <span class="badge @((DateTime.Now > item.FechaEntrega) ? " bg-danger" : "bg-success" )">@item.FechaEntrega.ToShortDateString()</span>
 
                                     </div>
                                 </div>
@@ -102,29 +145,29 @@
                     </div>
                 </div>
 
-            }
+                }
 
 
+            </div>
         </div>
     </div>
-</div>
 
 
 
-<br />
-<br />
+    <br />
+    <br />
 
 
-<h1>Todas las Tareas Terminadas</h1>
+    <h1>Todas las Tareas Terminadas</h1>
 
 
-<div class="album py-5 bg-body-tertiary">
-    <div class="container">
-        <div class="row row-cols-1">
+    <div class="album py-5 bg-body-tertiary">
+        <div class="container">
+            <div class="row row-cols-1">
 
 
-            @foreach (var item in Model)
-            {
+                @foreach (var item in Model)
+                {
                 if (item.Prioridad != 0) continue;
 
                 <div class="col-12">
@@ -132,9 +175,9 @@
                         <div class="row g-0">
                             @if (item.FotoUrl != null)
                             {
-                                <div class="col-md-4">
-                                    <img src="@item.FotoUrl" alt="Imagen de @item.Nombre" height="207px" width="auto" class="rounded-start">
-                                </div>
+                            <div class="col-md-4">
+                                <img src="@item.FotoUrl" alt="Imagen de @item.Nombre" height="207px" width="auto" class="rounded-start">
+                            </div>
                             }
                             <div class="col-md-4">
                                 <div class="card-body">
@@ -142,18 +185,18 @@
                                     <p class="card-text"><small class="text-muted">@item.Departamento.Nombre - @item.Departamento.Sede.Nombre</small></p>
                                     @if (item.User != null)
                                     {
-                                        <p class="card-text">Responsable: <strong>@item.User.Nombre</strong></p>
+                                    <p class="card-text">Responsable: <strong>@item.User.Nombre</strong></p>
                                     }
                                     else
                                     {
-                                        <p class="card-text">Responsable: <strong>No asignado</strong></p>
+                                    <p class="card-text">Responsable: <strong>No asignado</strong></p>
                                     }
                                     <div class="d-flex justify-content-start align-items-center">
 
 
                                         @if (User.IsInRole("admin"))
                                         {
-                                            <a asp-controller="tarea" asp-action="edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Editar</a>
+                                        <a asp-controller="tarea" asp-action="edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Editar</a>
                                         }
 
                                     </div>
@@ -171,11 +214,11 @@
                     </div>
                 </div>
 
-            }
+                }
 
 
+            </div>
         </div>
     </div>
-</div>
 
 
