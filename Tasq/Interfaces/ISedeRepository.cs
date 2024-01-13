@@ -18,7 +18,6 @@ namespace Tasq.Interfaces
         // Task<Sede> GetByIdAsyncNoTracking(int id);
 
         // CRUD
-        // Por convención las funciones CRUD siempre van hasta abajo
         bool Add(Sede sede);
         bool Update(Sede sede);
         bool Delete(Sede sede);

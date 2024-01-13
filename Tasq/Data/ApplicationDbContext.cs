@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore; // Se agregó esta picandole a DbContext
+using Microsoft.EntityFrameworkCore;
 using Tasq.Models;
 
 // Ésta clase es muy importante, nos va a permitir meter y sacar cosas de la Db cuando queramos
@@ -12,9 +12,6 @@ namespace Tasq.Data
 {
 	public class ApplicationDbContext : IdentityDbContext<AppUser>
     {
-
-
-
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {

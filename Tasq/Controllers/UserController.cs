@@ -32,6 +32,7 @@ namespace Tasq.Controllers
         }
 
 
+        // Index GET, Se cargan los datos de todos los usuarios para desplegarlos en una lista de usuarios
         [HttpGet("users")] // Ésto es para definir que ese es el URL que queremos que se use
         public async Task<IActionResult> Index()
         {
@@ -58,11 +59,13 @@ namespace Tasq.Controllers
         }
 
 
+        // Se cargan los datos del usuario seleccionado para mostrar sus detalles, incluyendo sus tareas oendientes y completadas
         public async Task<IActionResult> Detail(string id)
         {
             var IdUser = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
             if (IdUser == null) return RedirectToAction("Login", "Account");
 
+            // Se verifica que solo un usuario administrador pueda acceder a los detalles de otros usuarios
             if (IdUser != id)
             {
                 if (!User.IsInRole("admin"))
@@ -98,7 +101,7 @@ namespace Tasq.Controllers
 
 
 
-
+        // Edit GET, se cargan los datos del usuario a editar para desplegarlos en una interfaz
         [Authorize]
         public async Task<IActionResult> Edit(string id)
         {
@@ -106,7 +109,7 @@ namespace Tasq.Controllers
             var IdUser = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
             if (IdUser == null) return RedirectToAction("Login", "Account");
 
-
+            // Se verifica que solo un usuario administrador pueda editar otros perfiles de usuarios
             if (IdUser != id)
             {
                 if (!User.IsInRole("admin"))
@@ -134,6 +137,7 @@ namespace Tasq.Controllers
         }
 
 
+        // Edit POST, se toman los datos que fueron mandados por el formulario, se verifica que sean válidos y se atualizan en la DB
         [HttpPost]
         public async Task<IActionResult> Edit(EditUserVM userVM)
         {
@@ -166,7 +170,7 @@ namespace Tasq.Controllers
 
 
 
-
+        // Delete POST, se busca al usuario a eliminar en la DB y se elimina, si se eliminó el mismo usuario que está interactuando en la WebApp se hace Log Out, sino, se regresa a la página de los usuarios
         [HttpPost, ActionName("Delete")]
         [Authorize]
         public async Task<IActionResult> DeleteUser(string id)
@@ -174,7 +178,6 @@ namespace Tasq.Controllers
             // Para checar si no es el mismo id que se pasa, que solo los admin puedan eliminar otros usuarios
             var IdUser = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
             if (IdUser == null) return RedirectToAction("Login", "Account");
-
 
             var user = await _uR.GetUserById(id);
             if (user == null) return View("Error");
@@ -192,7 +195,6 @@ namespace Tasq.Controllers
             _uR.Delete(user); 
             return RedirectToAction("Logout", "Account");
         }
-
 
 
 

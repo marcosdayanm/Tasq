@@ -1,9 +1,4 @@
 ﻿
-document.addEventListener("DOMContentLoaded", function () {
-
-
-});
-
 
 // Validación dinámica de contraseña en el cliente, para que el usuario pueda ir viendo de forma dinámica
 function validatePassword(password) {
@@ -71,7 +66,7 @@ function validatePassword(password) {
 
 
 
-// Funcionalidad de mostrar contraseña
+// Funcion para mostrar contraseña cambiando el tipo del input field y la clase del Ojito
 function pwOjito(inputId) {
     const passwordInput = document.getElementById(inputId);
     const passwordIcon = document.querySelector(`#${inputId} + .pw-ojito`);
@@ -92,7 +87,7 @@ function pwOjito(inputId) {
 
 
 
-// AJAX de Tarea
+// AJAX de Actualizar Tarea, se toma la información del from y su acción para hacer una solicitud AJAX para ejecutar la función en el back, y en caso de que sea exitosa se actualizan los elementos del front end
 function updateTarea(button, email) {
     var form = button.closest('form');
     var actionUrl = form.dataset.url;
@@ -148,7 +143,7 @@ function updateTarea(button, email) {
 
 
 
-// AJAX Tarea para Detalles de Usuario
+// AJAX Actualizar Tarea para Detalles de Usuario, en este caso si la solicitud es exitosa, se elimina el elemento de la interfaz, ya que se dejará de mostrar como las tareas en las que el usuario es responsable
 function Desanotar(button) {
     var form = button.closest('form');
     var idTarea = form.dataset.idTarea;

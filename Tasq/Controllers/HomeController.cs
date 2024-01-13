@@ -14,6 +14,7 @@ public class HomeController : Controller
         _logger = logger;
     }
 
+    // modificada para que la ruta por default lleve la función index del controller de sede, la cual requiere que el usuario esté autenticado
     public IActionResult Index()
     {
         return RedirectToAction("Index", "Sede");
@@ -27,7 +28,7 @@ public class HomeController : Controller
     //}
 
 
-
+    // FUnción que lleva al usuario a una interfaz controlada de errores, para rutas que no tienen funcionalidad en la WebApp
     [Route("Home/Error/{statusCode?}")]
     public IActionResult Error(int? statusCode = null)
     {

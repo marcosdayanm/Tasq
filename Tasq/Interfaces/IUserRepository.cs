@@ -5,6 +5,7 @@ namespace Tasq.Interfaces
 {
 	public interface IUserRepository
 	{
+        // Consultas a la DB
         Task<IEnumerable<AppUser>> GetAllUsers();
         Task<AppUser> GetUserById(string id);
         Task<AppUser> GetUserByIdNoTracking(string id);

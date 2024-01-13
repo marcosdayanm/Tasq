@@ -25,9 +25,6 @@ namespace Tasq.Data
                     await roleManager.CreateAsync(new IdentityRole(UserRoles.User));
 
 
-
-
-
                 // Admin Users
                 var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
 

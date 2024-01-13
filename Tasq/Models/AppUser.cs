@@ -8,6 +8,7 @@ namespace Tasq.Models
 {
 	public class AppUser : IdentityUser // Para el IdentityFramework
 	{
+        // No es necesario que el IdentityFramework genera el ID
         //[Key]
         //public string Id { get; set; } 
 

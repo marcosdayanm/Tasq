@@ -32,6 +32,7 @@ namespace Tasq.Controllers
         }
 
 
+        // Detalles de una sede GET, se muestran los detalles de una sede, así como sus departamentos y todas las tareas que tengan cada uno de los departamentos de la sede
         public async Task<IActionResult> Detail(int id)
         {
             Sede sede = await _sedeR.GetByIdAsync(id);
@@ -50,7 +51,7 @@ namespace Tasq.Controllers
         }
 
 
-
+        // Create GET
         [Authorize(Roles = "admin")]
         public IActionResult Create()
         {
@@ -58,6 +59,7 @@ namespace Tasq.Controllers
         }
 
 
+        // Create POST, se toman los datos del formulario que insertó el usuario, se comprueba que el modelstate sea válido, y se crea un objeto que se insertará con la función del repositorio en la DB
         [HttpPost]
         public async Task<IActionResult> Create(CreateSedeVM sedeVM)
         {
@@ -82,14 +84,13 @@ namespace Tasq.Controllers
 
             };
 
-      
             _sedeR.Add(sede);
             return RedirectToAction("Index");
         }
 
 
 
-
+        // Edit GET, se pasan los datos de la sede a la interfaz para que puedan ser editados
         [Authorize(Roles = "admin")]
         public async Task<IActionResult> Edit(int id)
         {
@@ -108,6 +109,7 @@ namespace Tasq.Controllers
         }
 
 
+        // Edit POST, casi el mismo protocolo de create, solo que se ejecutsa la función Update del repository, no Create
         [HttpPost]
         public async Task<IActionResult> Edit(int id, EditSedeVM sedeVM)
         {
@@ -135,6 +137,7 @@ namespace Tasq.Controllers
         }
 
 
+        // Delete POST, se busca el elemento en la DB por su id y se elimina de la DB
         [Authorize(Roles = "admin")]
         [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeleteSede(int id)
