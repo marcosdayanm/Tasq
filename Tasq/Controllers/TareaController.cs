@@ -119,6 +119,7 @@ namespace Tasq.Controllers
                 IdDepartamento = tareaVM.IdDepartamento,
                 Departamento = tareaVM.Departamento,
                 FechaEntrega = tareaVM.FechaEntrega,
+                Prioridad = 1
             };
 
             _tareaR.Update(tarea);
