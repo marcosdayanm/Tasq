@@ -89,25 +89,24 @@ function pwOjito(inputId) {
 
 // AJAX de Actualizar Tarea, se toma la información del from y su acción para hacer una solicitud AJAX para ejecutar la función en el back, y en caso de que sea exitosa se actualizan los elementos del front end
 function updateTarea(button, email) {
-    var form = button.closest('form');
-    var actionUrl = form.dataset.url;
-    var idTarea = form.dataset.idTarea;
-    var returnUrl = form.querySelector('input[name="returnUrl"]').value;
+    var form = button.closest('form'); // encuentra el formulario más cercano al botón que llamó a a función
+    var actionUrl = form.dataset.url; // obtiene el url a donde mandar la solicitud AJAX, éste fue especificado con el tag data-url en el botón
+    var idTarea = form.dataset.idTarea; // obtiene el id de la tarea desde el tag data del formulario
+    var returnUrl = form.querySelector('input[name="returnUrl"]').value; // obtiene el url de retorno desde un hidden input del form
 
 
     //  solicitud AJAX
-    var formData = new FormData();
+    var formData = new FormData(); // objeto al que se le appendea el id de la tarea y el url de retorno de manera tipo de diccionario
     formData.append('idTarea', idTarea);
-    formData.append('returnUrl', returnUrl);
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', actionUrl, true);
-    xhr.setRequestHeader('RequestVerificationToken', document.querySelector('input[name="__RequestVerificationToken"]').value);
+    formData.append('returnUrl', returnUrl); // los mismos nombres que los argumentos de la función de TareaController
+    var xhr = new XMLHttpRequest(); // se crea un objeto de éste tipo, el cual se confgura para mandar una solicitud POST a actionUrl
+    xhr.open('POST', actionUrl, true); // El primer argumento indica el método HTTP (POST), el segundo es la URL a la que se enviará la solicitud, y el tercer argumento (true) indica que la solicitud será asíncrona.
+    xhr.setRequestHeader('RequestVerificationToken', document.querySelector('input[name="__RequestVerificationToken"]').value); // Se establece un encabezado en la solicitud para incluir el token de verificación de la solicitud (importante para la seguridad).
 
 
     // Se cambian los datos de visualización solo en el front para que no se tenga que volver a cargar la página y aplicar la lógica del .cshtml
-    xhr.onload = function () {
+    xhr.onload = function () { // Éste es el manejador de eventos del objeto tipo XMLHttpRequest xml, el cual hará que se ejecute la función juna vez que se reciba una respuesta
         if (xhr.status === 200) {
-
 
             // Texto y clase del botón
             var buttonText = button.textContent.trim() === "Anotarme" ? "Desanotarme" : "Anotarme";
