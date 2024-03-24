@@ -1,27 +1,97 @@
 ﻿@using Tasq.ViewModels
+@using System.Security.Claims
 @model List<UserVM>
 
 
 
+
+<h1>Mi Usuario</h1>
+
+
+@{
+
+
+    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+    var u = Model.FirstOrDefault(u => u.Id == userId);
+    if (u != null)
+    {
+        <div class="container mt-3">
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="row align-items-center">
+
+               
+                        @if (u.FotoUrl != null)
+                        {
+                            <div class="col-2">
+                                <img src="@u.FotoUrl" class="img-userlist" role="img" width="auto" height="100" alt="User Image">
+                            </div>
+                        }
+                       
+
+                        <div class="col-md-7">
+                            <h5 class="card-title">Nombre: @u.Nombre</h5>
+                            <p class="card-text">
+                                Email: @u.Email
+                            </p>
+                            <p class="card-text">
+                                Sede: @(u.Sede?.Nombre ?? "No especificado")
+                            </p>
+
+                            @if (u.FechaNacimiento.HasValue)
+                            {
+                                <p class="card-text">
+                                    Fecha de Nacimiento: @u.FechaNacimiento.Value.ToShortDateString()
+                                </p>
+                            }
+
+                        </div>
+
+                        @if (u.FormacionProfesional != null)
+                        {
+                            <div class="col-md-3 text-md-right">
+                                <p class="text-muted">Formación Profesional: @u.FormacionProfesional</p>
+                            </div>
+                        }
+
+                        <br />
+                        <p class="card-text"><a asp-controller="user" asp-action="detail" asp-route-id="@u.Id" max-size="100" class="btn btn-sm btn-outline-secondary">Detalles</a></p>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+
+
+
+
+<br />
+<br />
 <h1>Todos los Usuarios</h1>
+
 
 
 @foreach (var user in Model)
 {
+    if (user.Id == userId) continue;
 
     <div class="container mt-3">
         <div class="card">
             <div class="card-body">
-                <!-- User's Image -->
+
                 <div class="row align-items-center">
                     @if (user.FotoUrl != null)
                     {
                         <div class="col-2">
-                            <img src="@user.FotoUrl" width="auto" height="80" alt="User Image">
+                            <img src="@user.FotoUrl" class="img-userlist" role="img" width="auto" height="100" alt="User Image">
                         </div>
                     }
 
-                    <!-- User's Info -->
                     <div class="col-md-7">
                         <h5 class="card-title">Nombre: @user.Nombre</h5>
                         <p class="card-text">
@@ -39,13 +109,20 @@
                         }
 
                     </div>
-                    <!-- Additional Info -->
+
                     @if (user.FormacionProfesional != null)
                     {
                         <div class="col-md-3 text-md-right">
                             <p class="text-muted">Formación Profesional: @user.FormacionProfesional</p>
                         </div>
                     }
+
+                    @if (User.IsInRole("admin"))
+                    {
+                        <br />
+                        <p class="card-text"><a asp-controller="user" asp-action="detail" asp-route-id="@user.Id" max-size="100" class="btn btn-sm btn-outline-secondary">Detalles</a></p>
+                    }
+
 
                 </div>
             </div>

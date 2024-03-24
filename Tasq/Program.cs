@@ -73,7 +73,6 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 
 
-
 // Conectar a la db, MySQL con Pomelo 6.0
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),

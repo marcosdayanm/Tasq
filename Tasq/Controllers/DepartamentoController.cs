@@ -23,6 +23,7 @@ namespace Tasq.Controllers
         }
 
 
+        // Se cargan todos los departamentos para ser desplegados
         public async Task<IActionResult> Index() 
         {
             IEnumerable<Departamento> dept = await _depaR.GetAll(); 
@@ -30,6 +31,7 @@ namespace Tasq.Controllers
         }
 
 
+        // Detalles de un departamento, se carga con todas sus tareas y se manda en un viewmodel
         public async Task<IActionResult> Detail(int id)
         {
             Departamento dept = await _depaR.GetByIdAsync(id);
@@ -47,7 +49,7 @@ namespace Tasq.Controllers
 
 
 
-
+        // Función pata crear un departamento, se manda el id y el nombre de la sede para que el usuario pueda confirmar que l está crando en la sede correcta
         [HttpGet("departamento/create/{idSede}")]
         [Authorize(Roles = "admin")]
         public async Task<IActionResult> Create(int idSede)
@@ -70,7 +72,7 @@ namespace Tasq.Controllers
 
 
 
-        // [Authorize(Roles = "Admin")]
+        // Crear departamento POST, se toman los datos para crear un objeto de departamento y se ntroducen en una función del repository de los departamentos para crear
         [HttpPost]
         public async Task<IActionResult> Create(CreateDepartamentoVM depaVM)
         {
@@ -97,7 +99,7 @@ namespace Tasq.Controllers
 
 
 
-
+        // Edit GET, se accede al departamento con el ID pasado y se mandan sus datos a una interfaz para que puedan ser editados
         [Authorize(Roles = "admin")]
         public async Task<IActionResult> Edit(int id)
         {
@@ -114,7 +116,7 @@ namespace Tasq.Controllers
             return View(depaVM);
         }
 
-
+        // Edit POST
         [HttpPost]
         public async Task<IActionResult> Edit(int id, EditDepartamentoVM depaVM)
         {
@@ -139,7 +141,7 @@ namespace Tasq.Controllers
 
         }
 
-
+        // Delete POST, se regresa a la sede la cual contenía el departamento
         [HttpPost, ActionName("Delete")]
         [Authorize(Roles = "admin")]
         public async Task<IActionResult> DeleteDepartamento(int id)

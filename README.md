@@ -23,6 +23,10 @@ La dirección de correo electrónico que proporciones será tu identificador ún
 - Usuario: santiago@tasq.com
 - Contraseña: Admin00*
 
+### Cuenta 4:
+- Usuario: admin2@tasq.com
+- Contraseña: Admin00*
+
 
 
 
@@ -67,9 +71,9 @@ Como usuario de Tasq, aquí tienes lo que puedes hacer en la sección de usuario
 
 Explorar Usuarios: Visualiza una lista de todos los usuarios registrados en la aplicación, accediendo a una visión general de los miembros de la empresa y sus roles.
 
-Detalles del Usuario: Consulta información detallada sobre tu usuario, incluyendo su nombre, correo electrónico, fecha de nacimiento, formación profesional y la sede a la que está asignado, pero además, podrás ver todas las tareas en las que estás inscriuto para gestionarlas de mejor manera
+Detalles del Usuario: Consulta información detallada sobre tu usuario, incluyendo su nombre, correo electrónico, fecha de nacimiento, formación profesional y la sede a la que está asignado, pero además, podrás ver todas las tareas en las que estás inscrito para gestionarlas de mejor manera
 
 
-
-
+### Eliminación de Usuarios
+Para eliminar un usuario, ya sea como administrador o como el mismo usuario, es importante liberar previamente todas las tareas a las que el usuario está anotando para que no hayan inconsistencias a la hora de eliminar el usuario y dejar tareas sin responsable. Si se intenta eliminar un usuario sin deslindarlo de todas sus tareas, ocurrirá un error.
 

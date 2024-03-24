@@ -1,0 +1,96 @@
+﻿@using Tasq.ViewModels
+@model EditUserVM
+
+
+<h1>Editar Perfil</h1>
+
+@{
+    ViewData["Title"] = "Editar Perfil";
+}
+
+
+@* Ésto lo agarré de Teddy Smith *@
+
+<div class="row">
+    <div class="col-md-6 offset-3">
+
+
+        @if (TempData["Error"] != null)@* Ésta es la validación de TempData que pusimos para que el usuario sepa si hubo un error o todo correcto *@
+        {
+            <div class="col-md-12 alert alert-danger">
+                <span><b>Sorry!</b> - @TempData["Error"]</span>
+            </div>
+        }
+
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <form method="post" asp-action="Edit">
+                    @* Ésto significa que es un form de post *@
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <input type="hidden" asp-for="Id" />
+
+                    <div class="form-group">
+                        <label asp-for="Nombre" class="control-label"></label>
+                        <input asp-for="Nombre" class="form-control">
+                        <span asp-validation-for="Nombre" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input asp-for="Email" class="form-control">
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="FechaNacimiento">Fecha de Nacimiento (Opcional)</label>
+                        <input asp-for="FechaNacimiento" type="datetime-local" class="form-control">
+                        <span asp-validation-for="FechaNacimiento" class="text.danger"></span>
+                    </div>
+
+                    @if (Model.Sedes != null && Model.Sedes.Any())
+                    {
+                        <div class="form-group">
+                            <label asp-for="SedeSeleccionadaId">* Selecciona una Sede</label>
+                            <select asp-for="SedeSeleccionadaId" required class="form-control">
+                                <option value="">-- Seleccione una Sede --</option>
+                                @foreach (var sede in Model.Sedes)
+                                {
+                                    <option value="@sede.Id">@sede.Nombre</option>
+                                }
+                            </select>
+                        </div>
+                    }
+
+                    <div class="form-group">
+                        <label asp-for="FormacionProfesional" class="control-label"></label>
+                        <input asp-for="FormacionProfesional" class="form-control">
+                        <span asp-validation-for="FormacionProfesional" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="FotoUrl" class="control-label"></label>
+                        <input asp-for="FotoUrl" class="form-control">
+                        <span asp-validation-for="FotoUrl" class="text-danger"></span>
+                    </div>
+
+                    <br />
+                    <div class="form-group">
+                        <input class="btn btn-outline-success float right" type="submit" value="Guardar" />
+                    </div>
+                </form>
+
+                <div class="form-group">
+                    <form asp-action="Delete" method="post">
+                        <input type="hidden" asp-for="Id" />
+                        <input type="submit" value="Eliminar Usuario" class="btn btn-danger float right mt-3" />
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

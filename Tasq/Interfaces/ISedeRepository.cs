@@ -12,12 +12,12 @@ namespace Tasq.Interfaces
     {
         // Consultas a la database
         Task<IEnumerable<Sede>> GetAll();
+        Task<IEnumerable<Sede>> GetAllNoTracking();
         Task<Sede> GetByIdAsync(int id);
         Task<IEnumerable<Sede>> GetSedeByCity(string city);
         // Task<Sede> GetByIdAsyncNoTracking(int id);
 
         // CRUD
-        // Por convención las funciones CRUD siempre van hasta abajo
         bool Add(Sede sede);
         bool Update(Sede sede);
         bool Delete(Sede sede);

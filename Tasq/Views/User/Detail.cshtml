@@ -19,7 +19,7 @@
                         @if (Model.FotoUrl != null)
                         {
                             <div class="col-lg-6 mb-4 mb-lg-0">
-                                <img src="@Model.FotoUrl" width="300" height="auto" alt="...">
+                                <img src="@Model.FotoUrl" class="img-user" width="300" height="auto" alt="...">
                             </div>
                         }
 
@@ -37,8 +37,10 @@
                                 {
                                     <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Fecha de Nacimiento:</span> @Model.FechaNacimiento.Value.ToShortDateString()</li>
                                 }
-                            <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Sede:</span> @(Model.Sede?.Nombre ?? "No especificado")</li>
+                                <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Sede:</span> @(Model.Sede?.Nombre ?? "No especificado")</li>
                                 <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Email:</span> @Model.Email</li>
+                                <li class="mb-2 mb-xl-3 display-28"><a asp-controller="user" asp-action="edit" asp-route-id="@Model.Id" max-size="100" class="btn btn-sm btn-outline-secondary">Editar Usuario</a></li>
+                                @*  <li class="mb-2 mb-xl-3 display-28"><a asp-controller="user" asp-action="Delete" max-size="100" class="btn btn-sm btn-danger">Eliminar Usuario</a></li> *@
                             </ul>
                         </div>
                     </div>
@@ -52,66 +54,175 @@
 
 
     @{
-        var tareas = await Model.Tareas;
+        var tareas = Model.Tareas;
     }
 
 
-    @if (tareas != null)
+    <br />
+    <h1>Tareas anotadas</h1>
+    <br />
+
+    @foreach (var item in tareas)
     {
-        <br />
-        <h1>Tareas anotadas</h1>
-        <br />
 
-        @foreach (var item in tareas)
-        {
+        if (item.Prioridad == 0) continue;
 
-            <div class="col-12">
-                <div class="card mb-4 shadow-sm">
-                    <div class="row g-0">
-                        @if (item.FotoUrl != null)
-                        {
-                            <div class="col-md-4">
-                                <img src="@item.FotoUrl" alt="Imagen de @item.Nombre" class="img-fluid rounded-start">
-                            </div>
-                        }
+        <div id="tarea-container-@item.Id" class="col-12">
+            <div class="card mb-4 shadow-sm">
+                <div class="row g-0">
+                    @if (item.FotoUrl != null)
+                    {
                         <div class="col-md-4">
-                            <div class="card-body">
-                                <h5 class="card-title">@item.Nombre</h5>
-                                <p class="card-text"><small class="text-muted">@item.Departamento.Nombre</small></p>
-                                @if (item.User != null)
+                            <img src="@item.FotoUrl" alt="Imagen de @item.Nombre" class="img-fluid rounded-start">
+                        </div>
+                    }
+                    <div class="col-md-4">
+                        <div class="card-body">
+                            <h5 class="card-title">@item.Nombre</h5>
+                            <p class="card-text"><small class="text-muted">@item.Departamento.Nombre</small></p>
+                            @if (item.User != null)
+                            {
+                                <p class="card-text">Responsable: <strong>@item.User.Email</strong></p>
+                            }
+                            else
+                            {
+                                <p class="card-text">Responsable: <strong>No asignado</strong></p>
+                            }
+
+
+
+
+                            @* Botones de acción de las tareas (modificado para panel de usuario) *@
+                        <div class="d-flex justify-content-start align-items-center">
+
+                            @{
+                                var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+
+                                if (item.IdUser == null || item.IdUser == userId || User.IsInRole("admin"))
                                 {
-                                    <p class="card-text">Responsable: <strong>@item.User.Nombre</strong></p>
-                                }
-                                else
-                                {
-                                    <p class="card-text">Responsable: <strong>No asignado</strong></p>
-                                }
-                                <div class="d-flex justify-content-start align-items-center">
-                                    <form asp-controller="Tarea" asp-action="Me" method="post">
+                                    @*
+                <form asp-controller="Tarea" asp-action="Me" method="post">
+                    <input type="hidden" name="idTarea" value="@item.Id" />
+                    <input type="hidden" name="returnUrl" value="@Context.Request.Path.Value" />
+                    <button type="submit" id="btn-tarea-@item.Id" class="btn btn-sm me-2 btn-danger">
+                        @((item.IdUser == userId) ? "Desanotarme" : "Desanotar")
+                    </button>
+                </form>
+                                    *@
+
+                                    <form id="tareaForm-@item.Id" data-id-tarea="@item.Id" data-url="@Url.Action("Me", "Tarea")">
                                         <input type="hidden" name="idTarea" value="@item.Id" />
                                         <input type="hidden" name="returnUrl" value="@Context.Request.Path.Value" />
-                                        <button type="submit" class="btn btn-danger btn-sm me-2">Desanotarme</button>
+                                        <button type="button"
+                                                onclick="Desanotar(this)"
+                                                id="btn-tarea-@item.Id"
+                                                class="btn btn-sm me-2 btn-danger">
+                                            @((item.IdUser == userId) ? "Desanotarme" : "Desanotar")
+                                        </button>
                                     </form>
-                                    @if (User.IsInRole("admin"))
-                                    {
-                                        <a asp-controller="tarea" asp-action="edit" asp-route-id="@item.Id" class="btn btn-secondary btn-sm">Editar</a>
-                                    }
-                                </div>
-                                <div class="mt-2">
-                                    <span class="badge bg-success">@item.FechaEntrega.ToShortDateString()</span>
-                                </div>
-                            </div>
+                                }
+
+
+                                if (User.IsInRole("admin"))
+                                {
+                                    <a asp-controller="tarea" asp-action="edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Editar</a>
+                                }
+
+
+                                @* Marcar como terminada *@
+                                if (User.IsInRole("admin") || userId == item.IdUser)
+                                {
+                                    <form asp-controller="Tarea" asp-action="Status" method="post">
+                                        <input type="hidden" name="idTarea" value="@item.Id" />
+                                        <input type="hidden" name="returnUrl" value="@Context.Request.Path.Value" />
+                                        <button type="submit" id="btn-tarea-@item.Id" class="btn btn-sm ms-2 me-2 btn-success">
+                                            Terminada
+                                        </button>
+                                    </form>
+                                }
+
+                            }
+
                         </div>
-                        <div class="col-md-4">
-                            <div class="card-body">
-                                <p class="mb-auto">@item.Descripcion</p>
+
+
+
+
+                            <div class="mt-2">
+                                <span class="badge @((DateTime.Now > item.FechaEntrega) ? "bg-danger" : "bg-success")">@item.FechaEntrega.ToShortDateString()</span>
+
                             </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card-body">
+                            <p class="mb-auto">@item.Descripcion</p>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-        }
+    }
+
+
+
+
+
+    <br />
+    <br />
+    <h1>Tareas terminadas</h1>
+    <br />
+
+    @foreach (var item in tareas)
+    {
+
+        if (item.Prioridad != 0) continue;
+
+        <div class="col-12">
+            <div class="card mb-4 shadow-sm">
+                <div class="row g-0">
+                    @if (item.FotoUrl != null)
+                    {
+                        <div class="col-md-4">
+                            <img src="@item.FotoUrl" alt="Imagen de @item.Nombre" class="img-fluid rounded-start">
+                        </div>
+                    }
+                    <div class="col-md-4">
+                        <div class="card-body">
+                            <h5 class="card-title">@item.Nombre</h5>
+                            <p class="card-text"><small class="text-muted">@item.Departamento.Nombre</small></p>
+                            @if (item.User != null)
+                            {
+                                <p class="card-text">Responsable: <strong>@item.User.Email</strong></p>
+                            }
+                            else
+                            {
+                                <p class="card-text">Responsable: <strong>No asignado</strong></p>
+                            }
+                            <div class="d-flex justify-content-start align-items-center">
+
+                                @if (User.IsInRole("admin"))
+                                {
+                                    <a asp-controller="tarea" asp-action="edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Editar</a>
+                                }
+                            </div>
+                            <div class="mt-2">
+                                Terminada en: <span class="badge bg-success">@item.FechaEntrega.ToShortDateString()</span>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card-body">
+                            <p class="mb-auto">@item.Descripcion</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     }
 
 

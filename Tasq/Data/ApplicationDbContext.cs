@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore; // Se agregó esta picandole a DbContext
+using Microsoft.EntityFrameworkCore;
 using Tasq.Models;
 
 // Ésta clase es muy importante, nos va a permitir meter y sacar cosas de la Db cuando queramos
@@ -10,16 +10,14 @@ using Tasq.Models;
 
 namespace Tasq.Data
 {
-	public class ApplicationDbContext : IdentityDbContext<AppUser>
+	public class ApplicationDbContext : IdentityDbContext<AppUser> // Éste archivo además de nuestros modelos, maneja los modelos de IdentityFramework
     {
 
-
-
-
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) // Permite que configuremos el contexto de la base de datos desde Program.cs
         {
 		}
 
+        // El data type DbSet representa una tabla en la base de datos
         public DbSet<Sede> Sedes { get; set; }
         public DbSet<Direccion> Direcciones { get; set; }
         public DbSet<Departamento> Departamentos { get; set; }
@@ -28,6 +26,7 @@ namespace Tasq.Data
 
 
         // Aclarar las relaciones One to Many
+        // Éste método se usa para confogurar los modelos cunado estén siendo creados, estableciendo las relaciones entre sí
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 

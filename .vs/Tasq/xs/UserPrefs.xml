@@ -6,14 +6,26 @@
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Tasq/Program.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Tasq/appsettings.json">
     <Files>
-      <File FileName="Tasq/Program.cs" Line="80" Column="35" />
+      <File FileName="Tasq/Program.cs" Line="108" Column="1" />
       <File FileName="../../../ASP.NET_Teddy/RunGroupWebApp/notes.md" Line="88" Column="16" />
-      <File FileName="Tasq/Models/AppUser.cs" Line="22" Column="40" />
+      <File FileName="Tasq/Models/AppUser.cs" Line="26" Column="49" />
       <File FileName="Tasq/Repository/TareaRepository.cs" Line="85" Column="1" />
       <File FileName="Tasq/Data/ApplicationDbContext.cs" Line="16" Column="1" />
-      <File FileName="Tasq/appsettings.json" Line="9" Column="6" />
+      <File FileName="Tasq/appsettings.json" Line="14" Column="1" />
+      <File FileName="Tasq/Data/Seed.cs" Line="63" Column="36" />
+      <File FileName="Tasq/Views/User/Detail.cshtml" Line="99" Column="39" />
+      <File FileName="Tasq/Views/Tarea/Index.cshtml" Line="1" Column="1" />
+      <File FileName="Tasq/ViewModels/RegisterVM.cs" Line="21" Column="48" />
+      <File FileName="Tasq/Views/Account/Register.cshtml" Line="97" Column="27" />
+      <File FileName="Tasq/Views/Departamento/Create.cshtml" Line="27" Column="75" />
+      <File FileName="Tasq/Views/Sede/Create.cshtml" Line="42" Column="1" />
+      <File FileName="Tasq/ViewModels/CreateSedeVM.cs" Line="1" Column="1" />
+      <File FileName="Tasq/Views/Tarea/Create.cshtml" Line="44" Column="11" />
+      <File FileName="Tasq/Views/Account/Login.cshtml" Line="14" Column="12" />
+      <File FileName="Tasq/Views/Shared/_Layout.cshtml" Line="76" Column="56" />
+      <File FileName="Tasq/Dockerfile" Line="22" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -21,8 +33,8 @@
           <Node name="Tasq">
             <Node name="Tasq">
               <Node name="Controllers" expanded="True" />
+              <Node name="Data" expanded="True" />
               <Node name="Interfaces" expanded="True" />
-              <Node name="Migrations" expanded="True" />
               <Node name="Models" expanded="True" />
               <Node name="Repository" expanded="True" />
               <Node name="ViewModels" expanded="True" />
@@ -42,7 +54,6 @@
                 <Node name="js" expanded="True" />
               </Node>
               <Node name="appsettings.json" expanded="True" />
-              <Node name="Program.cs" selected="True" />
             </Node>
           </Node>
         </State>

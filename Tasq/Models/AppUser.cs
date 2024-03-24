@@ -8,6 +8,7 @@ namespace Tasq.Models
 {
 	public class AppUser : IdentityUser // Para el IdentityFramework
 	{
+        // No es necesario que el IdentityFramework genera el ID
         //[Key]
         //public string Id { get; set; } 
 
@@ -18,7 +19,7 @@ namespace Tasq.Models
 
         // FK a Sede
         [ForeignKey("Sede")]
-        public int? IdSede { get; set; }
+        public int IdSede { get; set; }
         public Sede? Sede { get; set; }
 
         // FK a Departamento

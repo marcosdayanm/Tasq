@@ -1,4 +1,5 @@
 ﻿<Properties StartupConfiguration="{6A3D66C1-C382-478F-AECF-C725E35243EE}|Default">
+<<<<<<< HEAD
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Program.cs">
     <Files>
@@ -9,16 +10,43 @@
       <File FileName="Dockerfile" />
       <File FileName="../../../../../../Cursos/Programming/C# y ASP.NET MVC/ASP.NET_Teddy/RunGroupWebApp/notes.md" Line="1" Column="1" />
       <File FileName="appsettings.Development.json" Line="3" Column="23" />
+=======
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/TareaController.cs">
+    <Files>
+      <File FileName="Program.cs" Line="74" Column="1" />
+      <File FileName="../../../../../../Cursos/C# y ASP.NET MVC/ASP.NET_Teddy/RunGroupWebApp/notes.md" Line="87" Column="1" />
+      <File FileName="Interfaces/IDepartamentoRepository.cs" Line="1" Column="1" />
+      <File FileName="wwwroot/js/site.js" Line="145" Column="1" />
+      <File FileName="Controllers/TareaController.cs" Line="142" Column="45" />
+      <File FileName="ViewModels/EditTareaVM.cs" Line="18" Column="49" />
+      <File FileName="Models/Tarea.cs" Line="20" Column="9" />
+      <File FileName="Views/Tarea/Edit.cshtml" Line="1" Column="1" />
+      <File FileName="Views/Tarea/Create.cshtml" Line="1" Column="1" />
+>>>>>>> main
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
+<<<<<<< HEAD
           <Node name="Tasq" expanded="True">
             <Node name="Tasq" expanded="True">
               <Node name="Dependencies" expanded="True" />
               <Node name="Data" expanded="True" />
               <Node name="Migrations" expanded="True" />
               <Node name="Models" expanded="True" />
+=======
+          <Node name="Tasq">
+            <Node name="Tasq">
+              <Node name="Controllers">
+                <Node name="TareaController.cs" selected="True" />
+              </Node>
+              <Node name="Models" expanded="True" />
+              <Node name="Views" expanded="True">
+                <Node name="Tarea" expanded="True" />
+              </Node>
+              <Node name="wwwroot" expanded="True" />
+>>>>>>> main
               <Node name="appsettings.json" expanded="True" />
             </Node>
           </Node>
@@ -26,10 +54,19 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+<<<<<<< HEAD
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.ItemProperties.Tasq PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+=======
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.Tasq PreferredExecutionTarget="/Applications/Google Chrome.app" />
+>>>>>>> main
 </Properties>

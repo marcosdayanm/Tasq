@@ -17,7 +17,7 @@ namespace Tasq.ViewModels
         public int? IdSede { get; set; }
         public Sede? Sede { get; set; }
 
-        public Task<IEnumerable<Tarea>>? Tareas { get; set; }
+        public IEnumerable<Tarea>? Tareas { get; set; }
     }
 }
 

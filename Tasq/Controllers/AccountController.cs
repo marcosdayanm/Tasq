@@ -4,9 +4,11 @@ using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity; // Para el manager
 using Microsoft.AspNetCore.Mvc;
 using Tasq.Data;
@@ -27,78 +29,67 @@ namespace Tasq.Controllers
         private readonly SignInManager<AppUser> _signInManager;
         private readonly ApplicationDbContext _context;
         private readonly ISedeRepository _sedeR;
+        private readonly IUserRepository _userR;
 
 
 
-        public AccountController(UserManager<AppUser> uM, SignInManager<AppUser> siM, ApplicationDbContext c, ISedeRepository sedeR)
+
+        public AccountController(UserManager<AppUser> uM, SignInManager<AppUser> siM, ApplicationDbContext c, ISedeRepository sedeR, IUserRepository userR)
         {
             _userManager = uM;
             _signInManager = siM;
             _context = c;
             _sedeR = sedeR;
+            _userR = userR;
         }
 
 
+        // Log In GET
         public IActionResult Login()
         {
-            var response = new LoginVM(); // para que si por accidente le das refresh a la página no se borren los datos que estabas metiendo de Log In
+            var response = new LoginVM();
             return View(response);
         }
 
 
+        // Log In POST
         [HttpPost]
         public async Task<IActionResult> Login(LoginVM logVM)
         {
+            // Modelstate no válido
             if (!ModelState.IsValid) return View(logVM);
 
-            var user = await _userManager.FindByEmailAsync(logVM.Email); // Ésto trata de buscar en la DB si ya hay un usuario con éstas características
 
+            var user = await _userManager.FindByEmailAsync(logVM.Email);
             if (user != null)
             {
-                // User encontrado, validar pw
+                // Se checa que la contraseña haga match con el user
                 var passwordCheck = await _userManager.CheckPasswordAsync(user, logVM.Password);
                 if (passwordCheck)
                 {
-                    // Credenciales correctas, logging in
+                    // Usuario y contraseña correctos
                     var result = await _signInManager.PasswordSignInAsync(user, logVM.Password, false, false);
-
-                    var claimsPrincipal = User as ClaimsPrincipal; // Esto obtiene el usuario autenticado actual
-                    var claimsList = claimsPrincipal.Claims.ToList(); // Aquí tienes todos los claims
-
-                    foreach (var claim in claimsList)
-                    {
-                        // Inspeccionar cada claim
-                        Console.WriteLine(claim.Type + ": " + claim.Value);
-                    }
-
-
                     if (result.Succeeded) return RedirectToAction("Index", "Sede");
 
                 }
-
-                // pw incorrecta
+                // Contraseña incorrecta
                 TempData["Error"] = "Contraseña incorrecta, intente de nuevo";
                 return View(logVM);
             }
-
-            // User no encontrado
+            // Usuario incorrecto
             TempData["Error"] = "Usuario no encontrado, intente de nuevo";
             return View(logVM);
-
         }
 
 
 
-
-
-
-
+        // Register GET
         public async Task<IActionResult> Register()
         {
 
             IEnumerable<Sede> sedes = await _sedeR.GetAll();
 
-            var response = new RegisterVM() // para que si por accidente le das refresh a la página no se borren los datos que estabas metiendo de Log In
+            var response = new RegisterVM() 
             {
                 Sedes = sedes,
             }; 
@@ -106,23 +97,42 @@ namespace Tasq.Controllers
         }
 
 
+        // Register POST
         [HttpPost]
         public async Task<IActionResult> Register(RegisterVM regVM)
         {
+            // Modelstate no válido, se mandan los datos insertados de nuevo al front
+            if (!ModelState.IsValid)
+            {
+                TempData["Error"] = "Error al crear una cuenta, intente de nuevo";
 
+                IEnumerable<Sede> sedes = await _sedeR.GetAll();
+                var response = new RegisterVM()
+                {
+                    Nombre = regVM.Nombre,
+                    Email = regVM.Email,
+                    FechaNacimiento = regVM.FechaNacimiento,
+                    FormacionProfesional = regVM.FormacionProfesional,
+                    FotoUrl = regVM.FotoUrl,
+                    SedeSeleccionadaId = regVM.SedeSeleccionadaId,
+                    Sedes = sedes,
+                    Password = regVM.Password,
+                    ConfirmPassword = regVM.ConfirmPassword,
+                };
 
-            if (!ModelState.IsValid) return RedirectToAction("Register");
+                return View(response);
+            }
 
-
-
-            var user = await _userManager.FindByEmailAsync(regVM.Email); // Esta función regresa un objeto de Task<AppUser> entonces podemos validar si se regresó o se regresó null
-            // En este caso queremos que no se encuentre porque se está haciendo register
+            // Esta función regresa un objeto de Task<AppUser> entonces podemos validar si se regresó o se regresó null
+            var user = await _userManager.FindByEmailAsync(regVM.Email); 
+            // Si se encuentra un usuario con el mismo email se lanza un error hy se pide que se de otro email
             if (user != null)
             {
                 TempData["Error"] = "La dirección de correo electróncio ya está asociada a una cuenta, intente de nuevo";
                 return View(regVM);
             }
 
+            // Se crea neuvo usuario con los datos insertados en el formulario
             var newUser = new AppUser()
             {
                 Email = regVM.Email,
@@ -134,12 +144,14 @@ namespace Tasq.Controllers
                 IdSede = regVM.SedeSeleccionadaId,
             };
 
+            // Se crea el usuario usando IdentityFramework
             var newUserResponse = await _userManager.CreateAsync(newUser, regVM.Password); // Acá ya no se verifica si las passwords matchean porque recordemos que lo pusimos en nuestro ViewModel
 
             if (newUserResponse.Succeeded)
                 await _userManager.AddToRoleAsync(newUser, UserRoles.User); // Ésto es poara ponerle el rol de usuario
 
 
+            // Error en la creación del usuario, se juntan todos los errores y se mandan al front para que el usuario pueda ver cuál fue el error
             if (!newUserResponse.Succeeded)
             {
                 var errorMessage = new StringBuilder();
@@ -153,9 +165,7 @@ namespace Tasq.Controllers
                     Debug.WriteLine($"Error: {error.Code}, {error.Description}");
                 }
 
-                // Asignar el mensaje de error a TempData["Error"]
                 TempData["Error"] = errorMessage.ToString();
-
 
                 IEnumerable<Sede> sedes = await _sedeR.GetAll();
                 var response = new RegisterVM() 
@@ -167,23 +177,25 @@ namespace Tasq.Controllers
             }
 
 
+            // Se hace log in para que una vez creada una cuenta se pueda acceder a la plataforma
             var logVM = new LoginVM()
             {
                 Email = regVM.Email,
                 Password = regVM.Password,
             };
 
-
             var result = await _signInManager.PasswordSignInAsync(newUser, logVM.Password, false, false);
 
             if (result.Succeeded) return RedirectToAction("Index", "Sede");
-            return RedirectToAction("Register");
+
+            TempData["Error"] = "Error al crear una cuenta, intente de nuevo";
+            return View(regVM);
 
 
         }
 
 
-
+        // Log Out GET
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();

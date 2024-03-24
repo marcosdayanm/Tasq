@@ -22,7 +22,7 @@ namespace Tasq.Controllers
             _depaR = depaR;
 		}
 
-
+        // Index GET, se mandan todas las tareas para que sean desplegadas en una página
         public async Task<IActionResult> Index()
         {
             IEnumerable<Tarea> tarea = await _tareaR.GetAll();
@@ -30,7 +30,7 @@ namespace Tasq.Controllers
         }
 
 
-
+        // Create GET, se crea una tarea en el departamento el cual se pase su id en el URL
         [HttpGet("tarea/create/{idDepartamento}")]
         public async Task<IActionResult> Create(int idDepartamento)
         {
@@ -50,10 +50,11 @@ namespace Tasq.Controllers
         }
 
 
+        // Create POST, se registran los datos del fromulario y se crea un nuevo objeto de tarea para añadirlo a la DB
         [HttpPost]
         public async Task<IActionResult> Create(CreateTareaVM tareaVM)
         {
-            if (!ModelState.IsValid) // Eso de ModelState es una clase en donde cuando postemaos data, corrobora si es que es válida para insertarla en la base de datos
+            if (!ModelState.IsValid)
             {
                 ModelState.AddModelError("", "La creación del Departamento no se pudo completar porque tuvo un error, intente de nuevo");
                 return View(tareaVM);
@@ -67,17 +68,18 @@ namespace Tasq.Controllers
                 FotoUrl = tareaVM.FotoUrl,
                 IdDepartamento = tareaVM.IdDepartamento,
                 FechaCreacion = DateTime.Now,
-                FechaEntrega = tareaVM.FechaEntrega
+                FechaEntrega = tareaVM.FechaEntrega,
+                Prioridad = 1
             };
 
             // Si es válido añadimos
             _tareaR.Add(tarea);
 
-            return RedirectToAction("Detail", "Departamento", new { id = tareaVM.IdDepartamento }); // El parámetro que necesita el Método Detail del Controlador de Sede
+            return RedirectToAction("Detail", "Departamento", new { id = tareaVM.IdDepartamento }); 
         }
 
 
-
+        // Edit GET, se busca la trea por su Id y se mandan sus daros al front para que puedan ser editados
         [Authorize(Roles = "admin")]
         public async Task<IActionResult> Edit(int id)
         {
@@ -97,7 +99,7 @@ namespace Tasq.Controllers
         }
 
 
-
+        // Edit POST, se toman los datos del formulario POST mandado desde el front, se revisa que el ModelState sea válido y se actualiza en la DB
         [HttpPost]
         public async Task<IActionResult> Edit(int id, EditTareaVM tareaVM)
         {
@@ -117,6 +119,7 @@ namespace Tasq.Controllers
                 IdDepartamento = tareaVM.IdDepartamento,
                 Departamento = tareaVM.Departamento,
                 FechaEntrega = tareaVM.FechaEntrega,
+                Prioridad = 1
             };
 
             _tareaR.Update(tarea);
@@ -126,7 +129,7 @@ namespace Tasq.Controllers
         }
 
 
-
+        // Me POST, función para actualizar la tarea añadiendo o quitando a el responsable de hacerla, ésta función se ejecuta de manera AJAX, con ayuda de JS
         [HttpPost]
         public async Task<IActionResult> Me(int idTarea, string returnUrl)
         {
@@ -135,9 +138,6 @@ namespace Tasq.Controllers
 
             var tarea = await _tareaR.GetByIdAsync(idTarea);
             if (tarea == null) return View("Error");
-
-            //tarea.IdUser = Iduser;
-
 
             // Asignar o desasignar la tarea
             if (tarea.IdUser == Iduser) tarea.IdUser = null;
@@ -149,12 +149,34 @@ namespace Tasq.Controllers
             var refererUrl = Request.Headers["Referer"].ToString();
 
             if (!string.IsNullOrEmpty(refererUrl) && Url.IsLocalUrl(returnUrl)) return Redirect(returnUrl);
-
-            else return RedirectToAction("Index", "Sede");
+            else return RedirectToAction("Index", "Tarea");
 
         }
 
 
+        // Status, ésta función sirve para completar las tareas una vez que el responsable las haya completado, el campo de prioridad se actualiza a 0 indicando que ya se completó la tarea para que la tarea se pueda separar a la lista de completadas al desplegarlas en el front
+        [HttpPost]
+        public async Task<IActionResult> Status(int idTarea, string returnUrl)
+        {
+            var tarea = await _tareaR.GetByIdAsync(idTarea);
+            if (tarea == null) return View("Error");
+
+            if (tarea.Prioridad != 0)
+            {
+                tarea.Prioridad = 0;
+                tarea.FechaEntrega = DateTime.Now;
+            }
+
+
+            _tareaR.Update(tarea);
+            var refererUrl = Request.Headers["Referer"].ToString();
+            if (!string.IsNullOrEmpty(refererUrl) && Url.IsLocalUrl(returnUrl)) return Redirect(returnUrl);
+            else return RedirectToAction("Index", "Tarea");
+
+        }
+
+
+        // Delete POST, se bisca la tarea por Id en la DB y se elimina
         [HttpPost, ActionName("Delete")]
         [Authorize(Roles = "admin")]
         public async Task<IActionResult> DeleteTarea(int id)
@@ -164,7 +186,7 @@ namespace Tasq.Controllers
 
             var departamentoId = tarea.IdDepartamento;
 
-            _tareaR.Delete(tarea); // Acá solo se pasa el club y en Entity Framework va a hacer todo el trabajo por nosotros
+            _tareaR.Delete(tarea); 
 
             return RedirectToAction("Detail", "Departamento", new { id = departamentoId });
         }
