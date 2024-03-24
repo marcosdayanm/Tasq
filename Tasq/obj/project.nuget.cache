@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Ysm4fukNVSUghdu13DPKUS7rO6SnMs4il5jqnZlmpEblF0+dBdB1JCpgsZ1/YejMJ60Vcm8toJEYXue7Q57Nkg==",
+  "dgSpecHash": "Wow+StbGAxxqU8TuLRhOYiupQAQ0ch7im/EtqRBXpoUmWsUatzFGcRqGa/rF02NQYD9apVaSiSiBDR67aunWpA==",
   "success": true,
   "projectFilePath": "/Users/marcosdayanmann/Library/Mobile Documents/com~apple~CloudDocs/Trabajo/Entrevistas Trabajo/Proyecto_Nubosoft/Tasq/Tasq/Tasq/Tasq.csproj",
   "expectedPackageFiles": [
@@ -44,6 +44,8 @@
     "/Users/marcosdayanmann/.nuget/packages/mysql.data/8.2.0/mysql.data.8.2.0.nupkg.sha512",
     "/Users/marcosdayanmann/.nuget/packages/mysqlconnector/2.0.0/mysqlconnector.2.0.0.nupkg.sha512",
     "/Users/marcosdayanmann/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512",
+    "/Users/marcosdayanmann/.nuget/packages/npgsql/6.0.10/npgsql.6.0.10.nupkg.sha512",
+    "/Users/marcosdayanmann/.nuget/packages/npgsql.entityframeworkcore.postgresql/6.0.22/npgsql.entityframeworkcore.postgresql.6.0.22.nupkg.sha512",
     "/Users/marcosdayanmann/.nuget/packages/pomelo.entityframeworkcore.mysql/6.0.0/pomelo.entityframeworkcore.mysql.6.0.0.nupkg.sha512",
     "/Users/marcosdayanmann/.nuget/packages/serilog/3.1.1/serilog.3.1.1.nupkg.sha512",
     "/Users/marcosdayanmann/.nuget/packages/serilog.aspnetcore/8.0.0/serilog.aspnetcore.8.0.0.nupkg.sha512",
@@ -82,7 +84,10 @@
     "/Users/marcosdayanmann/.nuget/packages/system.threading.tasks/4.3.0/system.threading.tasks.4.3.0.nupkg.sha512",
     "/Users/marcosdayanmann/.nuget/packages/system.threading.tasks.extensions/4.5.4/system.threading.tasks.extensions.4.5.4.nupkg.sha512",
     "/Users/marcosdayanmann/.nuget/packages/system.windows.extensions/4.7.0/system.windows.extensions.4.7.0.nupkg.sha512",
-    "/Users/marcosdayanmann/.nuget/packages/zstdsharp.port/0.7.1/zstdsharp.port.0.7.1.nupkg.sha512"
+    "/Users/marcosdayanmann/.nuget/packages/zstdsharp.port/0.7.1/zstdsharp.port.0.7.1.nupkg.sha512",
+    "/Users/marcosdayanmann/.nuget/packages/microsoft.netcore.app.ref/6.0.26/microsoft.netcore.app.ref.6.0.26.nupkg.sha512",
+    "/Users/marcosdayanmann/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.26/microsoft.aspnetcore.app.ref.6.0.26.nupkg.sha512",
+    "/Users/marcosdayanmann/.nuget/packages/microsoft.netcore.app.host.osx-arm64/6.0.26/microsoft.netcore.app.host.osx-arm64.6.0.26.nupkg.sha512"
   ],
   "logs": []
 }

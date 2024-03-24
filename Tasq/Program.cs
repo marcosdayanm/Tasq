@@ -74,11 +74,18 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 
 // Conectar a la db, MySQL con Pomelo 6.0
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
-        new MySqlServerVersion(new Version(5, 7, 0)))); // Ajusta la versión según tu servidor MySQL
+//builder.Services.AddDbContext<ApplicationDbContext>(options =>
+//    options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
+//        new MySqlServerVersion(new Version(5, 7, 0)))); // Ajusta la versión según tu servidor MySQL
 
 
+// Conectar a la db con PSQL
+builder.Services.AddEntityFrameworkNpgsql()
+    .AddDbContext<ApplicationDbContext>(options =>
+{
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
+
+});
 
 
 
