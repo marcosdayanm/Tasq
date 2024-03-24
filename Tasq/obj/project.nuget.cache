@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0DPVukXjsYVyGblbx8JP6J5BdhmqRDzPZz21zUukkqNQrRj7HrZQoVYxumxH1xUz3UUWVPeVXqjm97Pwg9C/bA==",
+  "dgSpecHash": "Ysm4fukNVSUghdu13DPKUS7rO6SnMs4il5jqnZlmpEblF0+dBdB1JCpgsZ1/YejMJ60Vcm8toJEYXue7Q57Nkg==",
   "success": true,
-  "projectFilePath": "/Users/marcosdayanmann/Library/Mobile Documents/com~apple~CloudDocs/Cursos/C# y ASP.NET MVC/Proyecto_Nubosoft/Tasq/Tasq/Tasq/Tasq.csproj",
+  "projectFilePath": "/Users/marcosdayanmann/Library/Mobile Documents/com~apple~CloudDocs/Trabajo/Entrevistas Trabajo/Proyecto_Nubosoft/Tasq/Tasq/Tasq/Tasq.csproj",
   "expectedPackageFiles": [
     "/Users/marcosdayanmann/.nuget/packages/bouncycastle.cryptography/2.2.1/bouncycastle.cryptography.2.2.1.nupkg.sha512",
     "/Users/marcosdayanmann/.nuget/packages/google.protobuf/3.21.9/google.protobuf.3.21.9.nupkg.sha512",
