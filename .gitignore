@@ -2,3 +2,6 @@
 appsettings.Development.json
 
 Tasq/db_sqlite3.db
+
+Tasq/bin/*
+Tasq/obj/
